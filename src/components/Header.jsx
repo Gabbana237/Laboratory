@@ -22,7 +22,7 @@ const Header = () => {
 
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-md ">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
@@ -148,13 +148,7 @@ const Header = () => {
     Contact
     <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
   </a>
-  <a
-    href="#"
-    className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
-  >
-  langue
-    <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
-  </a>
+ 
 </nav>
 
 
