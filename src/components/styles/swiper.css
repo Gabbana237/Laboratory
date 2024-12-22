@@ -1,0 +1,10 @@
+.swiper-pagination-bullet {
+    background-color: #e5e5e5; /* Couleur par défaut */
+    opacity: 0.7;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background-color: #299581; /* Votre couleur personnalisée */
+    opacity: 1;
+  }
+  

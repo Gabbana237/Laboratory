@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <p className="bg-darkGreen p-[2px]"></p>
+      <p className="bg-darkGreen pt-8 p-[2px]"></p>
       <div className="bg-gray-800 text-gray-200 py-8">
         <div className="container mx-auto px-4">
           {/* Utilisation de Grid pour un layout responsive */}
