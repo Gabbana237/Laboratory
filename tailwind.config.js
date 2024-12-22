@@ -19,6 +19,19 @@ module.exports = {
         // Tailles personnalisées
         'custom-small': '0.65rem',
         'custom-large': '2.75rem',
+      },
+    },
+  },
+  plugins: [],
+};
+
+
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {
       colors: {
         darkBlue: '#314d66',
         turquoiseLight: '#1eb798',

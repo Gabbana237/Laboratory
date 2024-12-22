@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaLanguage } from "react-icons/fa"; 
 
 const Header = () => {
   // État pour gérer l'affichage du menu mobile
@@ -28,8 +27,8 @@ const Header = () => {
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
           <div className="text-lg leading-tight">
-            <p className="font-bold text-blue-600 text-xl">Laboratoire Chimie</p>
-            <p className="text-blue-600 text-lg">University of Dschang</p>
+            <p className="font-bold text-blue-600 text-darkGreen text-xl">Laboratoire Chimie</p>
+            <p className="text-blue-600 text-darkGreen text-lg">University of Dschang</p>
           </div>
         </div>
 
@@ -153,7 +152,7 @@ const Header = () => {
     href="#"
     className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
   >
-    🇫🇷🇬🇧
+  langue
     <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
   </a>
 </nav>
@@ -316,22 +315,7 @@ const Header = () => {
         </li>
 
         {/* Sélecteur de langue */}
-        <li className="flex items-center space-x-3 mt-4">
-          <a
-            href="#french"
-            className="text-gray-700 hover:text-blue-600 text-xl transform hover:scale-105 transition duration-300"
-          >
-            <FaLanguage className="text-2xl" />
-            <span>Français</span>
-          </a>
-          <a
-            href="#english"
-            className="text-gray-700 hover:text-blue-600 text-xl transform hover:scale-105 transition duration-300"
-          >
-            <FaLanguage className="text-2xl" />
-            <span>English</span>
-          </a>
-        </li>
+      
       </ul>
     )}
   </nav>
