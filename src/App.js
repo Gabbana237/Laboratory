@@ -10,12 +10,15 @@ function App() {
     <div className="bg-gray-100">
       <Header />
       <Carousel/>
-      <div className="pt-4 flex items-center justify-center h-screen">
+      <div className="flex items-center">
        <LabOverview/>
       </div>
-      <div className='pt-10 flex items-center justify-center h-screen'>
+      <section>
+      <div className='mt-12 pb-10 flex items-center sm:mt-auto'>
         <ResearchDomains/>
       </div>
+      </section>
+     
       <div className='pt-10 '>
       <Footer />
       </div>

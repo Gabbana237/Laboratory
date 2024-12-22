@@ -2,13 +2,14 @@ import React from "react";
 import chimieImage from '../../images/chimie.jpg';
 import materiauxImage from  '../../images/chimie.jpg';
 import environnementImage from  '../../images/pepinieres.jpg';
+
 const ResearchDomains = () => {
   const domains = [
     {
       title: "Chimie Organique",
       description:
         "Découvrez les solutions innovantes pour des composés organiques, essentiels pour la recherche pharmaceutique et industrielle.",
-      image:chimieImage,
+      image: chimieImage,
       link: "/chimie-organique",
     },
     {
@@ -23,16 +24,16 @@ const ResearchDomains = () => {
       title: "Environnement & Durabilité",
       description:
         "Des solutions pour protéger notre planète et assurer un avenir plus vert.",
-      image:environnementImage,
+      image: environnementImage,
       link: "/environnement-durabilite",
     },
   ];
 
   return (
-    <section className="py-16 px-8 bg-gray-100">
+    <section className=" px-8 bg-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-12">
         {/* Section Title */}
-        <h2 className="text-4xl font-extrabold text-gray-800">
+        <h2 className="lg:text-4xl md:text-2xl text-xl font-extrabold text-gray-800">
           Domaines de Recherche
         </h2>
         <p className="mt-4 text-lg text-gray-600">
@@ -41,7 +42,7 @@ const ResearchDomains = () => {
       </div>
 
       {/* Research Domains */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 sm:mx-8 lg:mx-16">
         {domains.map((domain, index) => (
           <div
             key={index}
@@ -62,13 +63,18 @@ const ResearchDomains = () => {
               </h3>
               <p className="text-gray-600 mt-4">{domain.description}</p>
               {/* Learn More */}
-              <a
+              <div className="mt-6 inline-block text-gray-800 hover:text-gray-100 rounded-lg border-darkGreen shadow-md hover:bg-darkGreen transition">
+              <a 
                 href={domain.link}
-                className="mt-6 inline-block px-6 py-2 bg-darkGreen text-white rounded-lg shadow-md hover:bg-darkGreen transition"
+                className="p-2"
               >
                 En savoir plus
               </a>
-            </div>
+              <p className="bg-darkGreen p-[0.1rem]"></p>
+ 
+              </div>
+              
+           </div>
           </div>
         ))}
       </div>
