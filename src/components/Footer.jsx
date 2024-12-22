@@ -2,10 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="">
       <p className="bg-darkGreen p-[2px]"></p>
-      <div className="bg-gray-800 text-gray-200 py-8">
-        <div className="container mx-auto px-4">
+      <div className="bg-gray-800 text-gray-200 py-8 h-80">
+        <div className="container mx-auto px-4 pt-12">
           {/* Utilisation de Grid pour un layout responsive */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Section Informations du laboratoire */}
