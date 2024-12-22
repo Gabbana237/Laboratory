@@ -28,7 +28,7 @@ const Carousel = () => {
           <img
             src="/images/carousel4.webp"
             alt="Laboratoire 1"
-            className="w-full h-[500px] object-cover"
+            className="w-full  h-screen object-cover"
           />
           {/* Dégradé fumée */}
           <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-darkGreen to-transparent"></div>
@@ -37,7 +37,7 @@ const Carousel = () => {
           <img
             src="/images/carousel5.jpeg"
             alt="Laboratoire 2"
-            className="w-full h-[500px] object-cover"
+            className="w-full h-screen object-cover"
           />
           {/* Dégradé fumée */}
           <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-darkGreen to-transparent"></div>
@@ -46,7 +46,7 @@ const Carousel = () => {
           <img
             src="/images/carousel8.jpg"
             alt="Laboratoire 3"
-            className="w-full h-[500px] object-cover"
+            className="w-full  h-screen object-cover"
           />
           {/* Dégradé fumée */}
           <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-darkGreen to-transparent"></div>
