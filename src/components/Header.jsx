@@ -27,8 +27,8 @@ const Header = () => {
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
           <div className="text-lg leading-tight">
-            <p className="font-bold text-blue-600 text-darkGreen text-xl">Laboratoire Chimie</p>
-            <p className="text-blue-600 text-darkGreen text-lg">University of Dschang</p>
+            <p className="font-bold text-darkGreen-600 text-darkGreen text-xl">Laboratoire Chimie</p>
+            <p className="text-darkGreen-600 text-darkGreen text-lg">University of Dschang</p>
           </div>
         </div>
 
@@ -38,11 +38,11 @@ const Header = () => {
   <div className="relative group">
     <a
       href="#about"
-      className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
+      className="relative text-gray-700 text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
 
     >
       Accueil
-      <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
     </a>
   
   </div>
@@ -51,17 +51,17 @@ const Header = () => {
   <div className="relative group">
     <a
       href="#studies"
-      className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
+      className="relative text-gray-700 text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
     >
       Recherches
-      <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
     </a>
     <div className="absolute left-0 w-48 mt-2 bg-white shadow-xl rounded-md opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-300">
       <ul className="space-y-2 p-3">
         <li>
           <a
             href="#current-research"
-            className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+            className="text-gray-700 hover:text-darkGreen-600 hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
           >
             Recherches en cours
           </a>
@@ -69,7 +69,7 @@ const Header = () => {
         <li>
           <a
             href="#publications"
-            className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+            className="text-gray-700 hover:text-darkGreen-600 hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
           >
             Publications récentes
           </a>
@@ -82,17 +82,17 @@ const Header = () => {
   <div className="relative group">
     <a
       href="#research"
-      className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
+      className="relative text-gray-700 text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
     >
       Plateformes
-      <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
     </a>
     <div className="absolute left-0 w-48 mt-2 bg-white shadow-xl rounded-md opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-300">
       <ul className="space-y-2 p-3">
         <li>
           <a
             href="#labs"
-            className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+            className="text-gray-700 hover:text-darkGreen-600 hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
           >
             Nos laboratoires
           </a>
@@ -100,7 +100,7 @@ const Header = () => {
         <li>
           <a
             href="#instruments"
-            className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+            className="text-gray-700 hover:text-darkGreen-600 hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
           >
              équipements
           </a>
@@ -113,17 +113,17 @@ const Header = () => {
   <div className="relative group">
     <a
       href="#citizens"
-      className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
+      className="relative text-gray-700 text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
     >
       Actualites
-      <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
     </a>
     <div className="absolute left-0 w-48 mt-2 bg-white shadow-xl rounded-md opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-300">
       <ul className="space-y-2 p-3">
         <li>
           <a
             href="#news"
-            className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+            className="text-gray-700 hover:text-darkGreen-600 hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
           >
             Nouvelles récentes
           </a>
@@ -131,7 +131,7 @@ const Header = () => {
         <li>
           <a
             href="#events"
-            className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+            className="text-gray-700 hover:text-darkGreen-600 hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
           >
             Événements à venir
           </a>
@@ -143,17 +143,17 @@ const Header = () => {
   {/* Contact Link (no dropdown) */}
   <a
     href="#international"
-    className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
+    className="relative text-gray-700 text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
   >
     Contact
-    <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
+    <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
   </a>
   <a
     href="#"
-    className="relative text-gray-700 text-xl hover:text-blue-600 transform hover:scale-105 transition duration-300"
+    className="relative text-gray-700 text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
   >
   langue
-    <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-600 transition-all duration-300 hover:w-full"></span>
+    <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
   </a>
 </nav>
 
@@ -162,7 +162,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden text-gray-700 hover:text-blue-600"
+          className="md:hidden text-gray-700 hover:text-darkGreen-600"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +209,7 @@ const Header = () => {
               <li>
                 <a
                   href="#home"
-                  className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition duration-300 rounded-lg px-2 py-1"
+                  className="text-gray-700 hover:text-darkGreen hover:bg-darkGreen-50 transition duration-300 rounded-lg px-2 py-1"
                 >
                   Home
                 </a>
