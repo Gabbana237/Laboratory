@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import Header from "../components/Header";
+import Footer from '../components/Footer';
 const AboutPage = () => {
   const [activeTab, setActiveTab] = useState("history");
 
@@ -15,9 +16,10 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="bg-gray-50 text-gray-800">
+    <div className="bg-white text-gray-800">
       {/* Header */}
-      <header className="bg-darkGreen text-white py-10">
+      <Header/>
+      <header className=" text-gray-800 pt-36 py-10">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl font-bold">À propos de notre laboratoire</h1>
           <p className="mt-2 text-lg">
@@ -135,6 +137,9 @@ const AboutPage = () => {
           </div>
         )}
       </div>
+      <div className='pt-10 '>
+        <Footer />
+        </div>
     </div>
   );
 };

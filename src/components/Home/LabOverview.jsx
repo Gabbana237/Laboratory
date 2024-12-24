@@ -46,28 +46,28 @@ const LabOverview = () => {
 
       {/* Statistics Section */}
       <div className="mt-16 grid gap-8 sm:grid-cols-2 md:grid-cols-4 text-center sm:gap-12 md:gap-8 lg:gap-8">
-        <div className="bg-emerald-50 p-6 rounded-lg shadow-md">
+        <div className="bg-emerald-100 p-6 rounded-lg shadow-md">
           <p className="text-4xl font-bold text-dark">
             <CountUp start={0} end={20} duration={2.5} />+
           </p>
           <p className="text-gray-700 mt-2">Années d'expertise</p>
           <p className="bg-darkGreen p-[0.12rem]"></p>
         </div>
-        <div className="bg-sky-50 p-6 rounded-lg shadow-md">
+        <div className="bg-gray-300 p-6 rounded-lg shadow-md">
           <p className="text-4xl font-bold text-dark">
             <CountUp start={0} end={100} duration={2.5} />+
           </p>
           <p className="text-gray-700 mt-2">Projets terminés</p>
           <p className="bg-darkGreen p-[0.12rem]"></p>
         </div>
-        <div className="bg-yellow-50 p-6 rounded-lg shadow-md">
+        <div className="bg-yellow-100 p-6 rounded-lg shadow-md">
           <p className="text-4xl font-bold text-dark">
             <CountUp start={0} end={50} duration={2.5} />+
           </p>
           <p className="text-gray-700 mt-2">Collaborateurs</p>
           <p className="bg-darkGreen p-[0.12rem]"></p>
         </div>
-        <div className="bg-pink-50 p-6 rounded-lg shadow-md">
+        <div className="bg-pink-100 p-6 rounded-lg shadow-md">
           <p className="text-4xl font-bold text-dark">
             <CountUp start={0} end={10} duration={2.5} />+
           </p>
