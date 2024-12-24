@@ -5,11 +5,13 @@ import LabOverview from './components/Home/LabOverview.jsx';
 import ResearchDomains from './components/Home/ResearchDomains.jsx';
 import Carousel from './components/Home/Carousel.jsx';
 import Footer from './components/Footer';
+import About from './components/Home/About.jsx';
 function App() {
   return (
     <div className="bg-gray-100">
       <Header />
       <Carousel/>
+      <About />
       <div className="flex items-center">
        <LabOverview/>
       </div>
@@ -18,7 +20,7 @@ function App() {
         <ResearchDomains/>
       </div>
       </section>
-     
+      
       <div className='pt-10 '>
       <Footer />
       </div>
