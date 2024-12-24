@@ -68,7 +68,7 @@ const Header = () => {
   {/* Accueil Link with Attractive Dropdown */}
   <div className="relative group">
     <a
-      href="#about"
+      href="/"
       className="relative text-darkGreen text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
 
     >
@@ -173,19 +173,20 @@ const Header = () => {
 
   {/* Contact Link (no dropdown) */}
   <a
-    href="#international"
+    href="/about"
+    className="relative text-darkGreen text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
+  >
+    A propos
+    <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
+  </a>
+  <a
+    href="/contact"
     className="relative text-darkGreen text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
   >
     Contact
     <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
   </a>
-  <a
-    href="#"
-    className="relative text-darkGreen text-xl hover:text-darkGreen-600 transform hover:scale-105 transition duration-300"
-  >
-  langue
-    <span className="absolute left-0 bottom-0 w-0 h-1 bg-darkGreen-600 transition-all duration-300 hover:w-full"></span>
-  </a>
+ 
 </nav>
 
 
