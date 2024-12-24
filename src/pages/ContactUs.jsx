@@ -4,11 +4,11 @@ import Footer from '../components/Footer';
 
 const ContactUs = () => {
   return (
-    <div className="bg-lightGray min-h-screen flex flex-col  py-10">
+    <div className="bg-lightGray flex flex-col">
       <Header />
 
       {/* Section des cartes (en haut) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 mx-10 lg:grid-cols-4 mt-14 gap-4 w-full max-w-6xl mb-10">
+      <div className="grid grid-cols-1 py-12 md:py-16 md:grid-cols-2 lg:grid-cols-4 mt-14 gap-4 w-full px-3 md:px-4 lg:px-8 mb-10">
         {/* Carte: Adresse */}
         <div className="bg-white p-4 rounded-lg shadow-md text-center">
           <div className="text-blue-500 text-3xl mb-3">📍</div>
@@ -41,15 +41,15 @@ const ContactUs = () => {
       </div>
 
       {/* Section formulaire et carte Google (côte à côte) */}
-      <div className="flex flex-col mx-10 lg:flex-row gap-6 w-full max-w-6xl">
+      <div className="flex flex-col lg:flex-row gap-6 w-full px-3 md:px-4 lg:px-8">
   {/* Section formulaire (à gauche) */}
   <div className="bg-white p-8 rounded-lg shadow-[0_4px_6px_-1px_rgba(34,139,34,0.6)] w-full lg:w-1/2">
-    <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Contactez-nous</h2>
+    <h2 className="text-2xl font-bold text-darkGreen mb-4 text-center">Contactez-nous</h2>
     <form>
       <input
         type="text"
         placeholder="Entrez votre nom"
-        className="w-full p-2 text-sm mb-3 border border-gray-300 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-darkGreen"
+        className="w-full p-2 text-sm mb-3 border border-gray-300 rounded focus:outline-none focus:ring-darkGreen focus:border-transparent focus:ring-2"
       />
       <input
         type="email"

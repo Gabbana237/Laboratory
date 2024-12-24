@@ -30,7 +30,7 @@ const ResearchDomains = () => {
   ];
 
   return (
-    <section className=" px-8 bg-gray-100">
+    <section className="px-4 md:px-4 lg:px-8 bg-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-12">
         {/* Section Title */}
         <h2 className="lg:text-4xl md:text-2xl text-xl font-extrabold text-gray-800">
@@ -42,7 +42,7 @@ const ResearchDomains = () => {
       </div>
 
       {/* Research Domains */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 sm:mx-8 lg:mx-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
         {domains.map((domain, index) => (
           <div
             key={index}
