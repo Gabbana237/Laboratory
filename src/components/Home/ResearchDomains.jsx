@@ -1,33 +1,50 @@
 import React from "react";
-import chimieImage from '../../images/chimie.jpg';
-import materiauxImage from  '../../images/chimie.jpg';
-import environnementImage from  '../../images/pepinieres.jpg';
+import chimieOrganique from '../../images/chimieOrganique.webp';
+import materiauxImage from  '../../images/chimieMater.jpg';
+import absorpImage from  '../../images/chimieabsop.jpg';
+import coordination from  '../../images/chimiecoord.jpg';
+import computationnelle from  '../../images/chimiecomp.jpg';
 
 const ResearchDomains = () => {
   const domains = [
     {
       title: "Chimie Organique",
       description:
-        "Découvrez les solutions innovantes pour des composés organiques, essentiels pour la recherche pharmaceutique et industrielle.",
-      image: chimieImage,
+        "Explorez la synthèse et les réactions des composés organiques, fondamentales pour la création de médicaments, de polymères, et de produits agrochimiques. De la conception de molécules à la caractérisation de leurs propriétés.",
+      image: chimieOrganique,
       link: "/chimie-organique",
     },
     {
-      title: "Matériaux Avancés",
+      title: "Chimie Computationnelle",
       description:
-        "Développement de matériaux de pointe pour l'aérospatial, l'énergie et bien plus encore.",
-      image:
-        "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-      link: "/materiaux-avances",
+        "Utilisez la puissance des simulations numériques et des calculs quantiques pour prédire et modéliser les propriétés des molécules et des matériaux. Accélérez la découverte de nouveaux composés et optimisez les réactions chimiques.",
+      image:computationnelle,
+      link: "/chimie-computationnelle",
+    },
+   {
+      title: "Chimie de Coordination",
+      description:
+        "Plongez dans l'étude des composés de coordination, impliqués dans des processus biologiques, catalytiques et des applications matérielles. Explorez leurs propriétés électroniques et leur comportement dans diverses réactions.",
+     image: coordination,
+      link: "/chimie-coordination",
     },
     {
-      title: "Environnement & Durabilité",
+      title: "Chimie de l'Absorption",
       description:
-        "Des solutions pour protéger notre planète et assurer un avenir plus vert.",
-      image: environnementImage,
-      link: "/environnement-durabilite",
+        "Étudiez les mécanismes d'absorption et d'adsorption de molécules, avec des applications dans la purification, la séparation de mélanges, et la conception de matériaux poreux pour le stockage d'énergie et la capture de CO2.",
+      image: absorpImage,
+      link: "/chimie-absorption",
     },
+    {
+       title: "Chimie des Matériaux",
+       description:
+         "Concevez et synthétisez des matériaux avancés aux propriétés ciblées pour des applications en aérospatial, énergie, électronique et biotechnologies. Explorez la chimie des solides, des polymères et des nanomatériaux.",
+       image:materiauxImage,
+       link: "/chimie-materiaux"
+    }
   ];
+
+  
 
   return (
     <section className="px-4 md:px-4 lg:px-8 bg-gray-100">

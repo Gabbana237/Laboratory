@@ -7,7 +7,7 @@ const Header = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) setActiveDropdown(null); // Réinitialiser les dropdowns si on ferme le menu
+    if (!isMenuOpen) setActiveDropdown(null);
   };
 
   const handleDropdownToggle = (index) => {
@@ -18,7 +18,6 @@ const Header = () => {
     {
       label: "Accueil",
       href: "/",
-     
     },
     {
       label: "Recherches",
@@ -30,17 +29,6 @@ const Header = () => {
         { label: "Collaborations", href: "/collaborations" },
       ],
     },
-    {
-      label: "Plateformes",
-      href: "/platforms",
-      subItems: [
-        { label: "Nos laboratoires", href: "/labs" },
-        { label: "Équipements", href: "/equipment" },
-        { label: "Installations", href: "/facilities" },
-        { label: "Services", href: "/services" },
-      ],
-    },
-   
     {
       label: "Actualités",
       href: "/news",
@@ -54,22 +42,14 @@ const Header = () => {
     {
       label: "Équipe",
       href: "/team",
-      subItems: [
-        { label: "Direction", href: "/management" },
-        { label: "Chercheurs", href: "/researchers" },
-        { label: "Doctorants", href: "/phd-students" },
-        { label: "Staff technique", href: "/technical-staff" },
-      ],
     },
     {
       label: "A propos",
       href: "/about",
-    
     },
     {
       label: "Contact",
       href: "/contact",
-    
     },
   ];
 
@@ -81,27 +61,37 @@ const Header = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6">
           {navItems.map((item, index) => (
-            <div key={index} className="relative group">
+            <div 
+              key={index} 
+              className="relative group"
+              onMouseLeave={() => setTimeout(() => setActiveDropdown(null), 200)}
+            >
               <a
                 href={item.href}
-                className="flex items-center gap-1 text-darkGreen hover:text-green-700"
+                className="flex items-center gap-1 text-darkGreen hover:text-green-700 py-2"
+                onMouseEnter={() => item.subItems && setActiveDropdown(index)}
               >
                 {item.label}
                 {item.subItems?.length > 0 && (
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
                 )}
               </a>
-              {item.subItems && (
-                <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200">
-                  {item.subItems.map((subItem, subIndex) => (
-                    <a
-                      key={subIndex}
-                      href={subItem.href}
-                      className="block px-4 py-2 text-sm hover:bg-green-100"
-                    >
-                      {subItem.label}
-                    </a>
-                  ))}
+              {item.subItems && activeDropdown === index && (
+                <div 
+                  className="absolute left-0 mt-0 w-64 bg-white shadow-lg rounded-lg border border-gray-100"
+                  onMouseEnter={() => setActiveDropdown(index)}
+                >
+                  <div className="py-2">
+                    {item.subItems.map((subItem, subIndex) => (
+                      <a
+                        key={subIndex}
+                        href={subItem.href}
+                        className="block px-4 py-3 text-sm hover:bg-green-50 text-darkGreen transition-colors duration-150"
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -120,36 +110,36 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg">
-          <nav className="space-y-4 p-4">
+          <nav className="space-y-1 p-4">
             {navItems.map((item, index) => (
-              <div key={index} className="border-b pb-2">
-                <div className="flex justify-between items-center">
+              <div key={index} className="border-b border-gray-100">
+                <div className="flex justify-between items-center py-2">
                   <a
                     href={item.href}
-                    className="text-darkGreen font-medium"
+                    className="text-darkGreen font-medium hover:text-green-700"
                   >
                     {item.label}
                   </a>
                   {item.subItems?.length > 0 && (
                     <button
                       onClick={() => handleDropdownToggle(index)}
-                      className="text-darkGreen"
+                      className="text-darkGreen p-2"
                     >
                       {activeDropdown === index ? (
-                        <ChevronUp />
+                        <ChevronUp className="w-5 h-5" />
                       ) : (
-                        <ChevronDown />
+                        <ChevronDown className="w-5 h-5" />
                       )}
                     </button>
                   )}
                 </div>
                 {activeDropdown === index && (
-                  <div className="mt-2 pl-4">
+                  <div className="mt-1 pl-4 pb-2">
                     {item.subItems.map((subItem, subIndex) => (
                       <a
                         key={subIndex}
                         href={subItem.href}
-                        className="block py-2 text-sm text-darkGreen hover:bg-green-100"
+                        className="block py-3 text-sm text-darkGreen hover:bg-green-50 rounded"
                       >
                         {subItem.label}
                       </a>
