@@ -49,14 +49,6 @@ const AboutPage = () => {
           </button>
           <button
             className={`py-2 text-sm px-2 lg:px-4 ${
-              activeTab === "membres" ? "border-b-4 border-darkGreen font-bold" : ""
-            }`}
-            onClick={() => setActiveTab("membres")}
-          >
-            Membres
-          </button>
-          <button
-            className={`py-2 text-sm px-2 lg:px-4 ${
               activeTab === "equipment" ? "border-b-4 border-darkGreen font-bold" : ""
             }`}
             onClick={() => setActiveTab("equipment")}
@@ -129,16 +121,6 @@ const AboutPage = () => {
             </ul>
           </div>
         )}
-
-        {activeTab === "membres" && (
-          <div>
-            <h2 className="text-3xl font-bold text-darkGreen mb-5">Membres</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-            membres
-            </div>
-          </div>
-        )}
-
      {activeTab === "equipment" && (
           <div>
             <h2 className="text-3xl font-bold text-darkGreen mb-5">Équipements</h2>

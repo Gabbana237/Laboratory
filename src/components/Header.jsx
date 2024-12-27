@@ -86,7 +86,7 @@ const Header = () => {
                       <a
                         key={subIndex}
                         href={subItem.href}
-                        className="block px-4 py-3 text-sm hover:bg-green-50 text-darkGreen transition-colors duration-150"
+                        className="block px-4 py-3 text-sm hover:bg-green-50 text-black transition-colors duration-150"
                       >
                         {subItem.label}
                       </a>
