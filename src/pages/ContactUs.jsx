@@ -8,9 +8,9 @@ const ContactUs = () => {
       <Header />
 
       {/* Section des cartes (en haut) */}
-      <div className="grid grid-cols-1 py-12 md:py-16 md:grid-cols-2 lg:grid-cols-4 mt-14 gap-4 w-full px-3 md:px-4 lg:px-8 mb-10">
+      <div className="bg-gradient-to-r from-darkGreen pt-20 text-dark sm:py-16 grid grid-cols-1 py-12 md:py-16 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full px-3 md:px-4 lg:px-8 mb-10">
         {/* Carte: Adresse */}
-        <div className="bg-white p-4 rounded-lg shadow-md text-center">
+        <div className="bg-white p-4 rounded-lg shadow-md text-center mt-8 md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">📍</div>
           <h3 className="text-md font-bold mb-2">NOTRE SIÈGE PRINCIPAL</h3>
           <p className="text-sm">Université de Dschang, Afrique, Cameroun </p>
@@ -18,7 +18,7 @@ const ContactUs = () => {
         </div>
 
         {/* Carte: Téléphone */}
-        <div className="bg-white p-4 rounded-lg shadow-md text-center">
+        <div className="bg-white p-4 rounded-lg shadow-md text-center md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">📞</div>
           <h3 className="text-md font-bold mb-2">NUMÉRO DE TÉLÉPHONE</h3>
           <p className="text-sm">691224241</p>
@@ -26,14 +26,14 @@ const ContactUs = () => {
         </div>
 
         {/* Carte: Fax */}
-        <div className="bg-white p-4 rounded-lg shadow-md text-center">
+        <div className="bg-white p-4 rounded-lg shadow-md text-center md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">📠</div>
           <h3 className="text-md font-bold mb-2">FAX</h3>
           <p className="text-sm">BP 67</p>
         </div>
 
         {/* Carte: Email */}
-        <div className="bg-white p-4 rounded-lg shadow-md text-center">
+        <div className="bg-white p-4 rounded-lg shadow-md text-center md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">✉️</div>
           <h3 className="text-md font-bold mb-2">EMAIL</h3>
           <p className="text-sm">contact@theme.com</p>

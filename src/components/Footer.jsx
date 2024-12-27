@@ -10,8 +10,8 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {/* Section Informations du laboratoire */}
             <div>
-              <div className="flex items-center space-x-3 mb-3">
-                <img src="/image" alt="logo" className="w-10 h-10" />
+              <div className="flex items-center space-x-3 mb-2">
+              <img src="/images/logoSite.png" alt="Logo du site" className="h-16 w-16 object-contain" />
                 <h3 className="text-lg font-bold">Situation du Laboratoire de Chimie</h3>
               </div>
               <p><i class="fas fa-map-marker-alt"></i>  Porte <span className="font-bold text-darkGreen">417</span> du decanat de la faculte des sciences</p>

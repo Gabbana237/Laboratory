@@ -31,12 +31,10 @@ const Header = () => {
     },
     {
       label: "Actualités",
-      href: "/news",
+      href: "#",
       subItems: [
         { label: "Nouvelles récentes", href: "/recent-news" },
         { label: "Événements à venir", href: "/upcoming-events" },
-        { label: "Séminaires", href: "/seminars" },
-        { label: "Conférences", href: "/conferences" },
       ],
     },
     {
@@ -56,8 +54,13 @@ const Header = () => {
   return (
     <header className="absolute top-0 left-0 w-full z-50 backdrop-blur-sm bg-white/5">
       <div className="container mx-auto flex items-center justify-between p-4">
-        <div className="text-lg font-bold">Laboratoire Chimie</div>
-
+      <div className="flex items-center">
+    <img
+      src="/images/logoSite.png"
+      alt="Logo du site"
+      className="h-16 w-16 object-contain"
+    /> <span className="mx-2 font-bold text-xl">URCHINGE</span>
+   </div>
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6">
           {navItems.map((item, index) => (

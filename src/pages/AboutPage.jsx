@@ -19,14 +19,27 @@ const AboutPage = () => {
     <div className="bg-white font-sans text-gray-800">
       {/* Header */}
       <Header/>
-      <header className=" text-gray-800 pt-36 py-10">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl font-bold">À propos de notre laboratoire</h1>
-          <p className="mt-2 text-lg">
-            Découvrez notre histoire, nos valeurs et notre équipement de pointe.
-          </p>
-        </div>
-      </header>
+      <header
+  className="relative bg-gradient-to-r from-darkGreen to-green-500 pt-20 mt-16 text-dark py-8 sm:py-16"
+  style={{
+    backgroundImage: "url('/images/logoSite.png')",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "contain",
+  }}
+>
+  <div className="container mx-auto text-center relative z-10">
+    <h1 className="text-xl md:text-2xl lg:text-4xl font-bold pt-8 md:pt-12 lg:pt-16">
+      À propos de notre laboratoire
+    </h1>
+    <p className="mt-2 text-sm lg:text-lg">
+      Découvrez notre histoire, nos valeurs et notre équipement de pointe.
+    </p>
+  </div>
+</header>
+
+
+
 
       {/* Tabs Navigation */}
       <div className="container mx-auto py-5">

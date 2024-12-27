@@ -9,10 +9,10 @@ const Team = () => {
     <div className="bg-gray-50 font-sans text-gray-800">
       {/* Header */}
       <Header />
-      <header className="text-gray-800 pt-36 pb-10">
+      <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto text-center">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen">Notre Équipe</h1>
-          <p className="mt-4 text-lg text-gray-600">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen pt-4 md:pt-6 lg:pt-10">Notre Équipe</h1>
+          <p className="mt-4 text-sm lg:text-lg text-gray-600">
             Découvrez les professionnels qui dirigent et soutiennent notre laboratoire.
           </p>
         </div>
