@@ -14,7 +14,9 @@ const Footer = () => {
                 <img src="/image" alt="logo" className="w-10 h-10" />
                 <h3 className="text-xl font-bold">Laboratoire de Chimie</h3>
               </div>
-              <p>Université de Dschang, Afrique, Cameroun</p>
+              <p className="text-sm"><i class="fas fa-map-marker-alt"></i> Université de Dschang, Afrique, Cameroun <br />
+                Porte <span className="font-bold text-darkGreen">417</span> du batiment principale de la Facultes des sciences
+              </p>
               <p><i class="fa fa-envelope"></i>  <a href="mailto:contact@laboratoire-chimir.com" className="underline decoration-darkGreen">contact@laboratoire-chimir.com</a></p>
               <p><i className="fa-phone fa "></i> +237 6 86 36 23 76</p>
             </div>

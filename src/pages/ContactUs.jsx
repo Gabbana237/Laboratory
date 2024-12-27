@@ -13,8 +13,8 @@ const ContactUs = () => {
         <div className="bg-white p-4 rounded-lg shadow-md text-center">
           <div className="text-blue-500 text-3xl mb-3">📍</div>
           <h3 className="text-md font-bold mb-2">NOTRE SIÈGE PRINCIPAL</h3>
-          <p className="text-sm">Universite de dschang</p>
-          <p className="text-sm">Faculte des sciences</p>
+          <p className="text-sm">Université de Dschang, Afrique, Cameroun </p>
+          <p className="text-sm">Porte <span className="font-bold text-darkGreen">417</span> du batiment principale de la Facultes des sciences</p>
         </div>
 
         {/* Carte: Téléphone */}

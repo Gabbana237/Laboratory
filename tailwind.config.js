@@ -32,6 +32,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'], // Police principale pour le texte
+        serif: ['Lora', 'serif'], // Police pour les titres et citations
+      },
       colors: {
         darkBlue: '#314d66',
         turquoiseLight: '#1eb798',

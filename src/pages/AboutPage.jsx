@@ -16,7 +16,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-white font-sans text-gray-800">
       {/* Header */}
       <Header/>
       <header className=" text-gray-800 pt-36 py-10">
@@ -32,7 +32,7 @@ const AboutPage = () => {
       <div className="container mx-auto py-5">
         <div className="flex justify-center space-x-5 border-b">
           <button
-            className={`py-2 px-4 ${
+            className={`py-2 text-sm px-2 lg:px-4 ${
               activeTab === "history" ? "border-b-4 border-darkGreen font-bold" : ""
             }`}
             onClick={() => setActiveTab("history")}
@@ -40,7 +40,7 @@ const AboutPage = () => {
             Historique
           </button>
           <button
-            className={`py-2 px-4 ${
+            className={`py-2 text-sm px-2 lg:px-4 ${
               activeTab === "values" ? "border-b-4 border-darkGreen font-bold" : ""
             }`}
             onClick={() => setActiveTab("values")}
@@ -48,14 +48,25 @@ const AboutPage = () => {
             Valeurs
           </button>
           <button
-            className={`py-2 px-4 ${
+            className={`py-2 text-sm px-2 lg:px-4 ${
+              activeTab === "membres" ? "border-b-4 border-darkGreen font-bold" : ""
+            }`}
+            onClick={() => setActiveTab("membres")}
+          >
+            Membres
+          </button>
+          <button
+            className={`py-2 text-sm px-2 lg:px-4 ${
               activeTab === "equipment" ? "border-b-4 border-darkGreen font-bold" : ""
             }`}
             onClick={() => setActiveTab("equipment")}
           >
             Équipements
           </button>
+
         </div>
+      
+        
       </div>
 
       {/* Tab Content */}
@@ -119,7 +130,16 @@ const AboutPage = () => {
           </div>
         )}
 
-        {activeTab === "equipment" && (
+        {activeTab === "membres" && (
+          <div>
+            <h2 className="text-3xl font-bold text-darkGreen mb-5">Membres</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+            membres
+            </div>
+          </div>
+        )}
+
+     {activeTab === "equipment" && (
           <div>
             <h2 className="text-3xl font-bold text-darkGreen mb-5">Équipements</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
