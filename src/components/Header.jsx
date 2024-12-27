@@ -31,12 +31,10 @@ const Header = () => {
     },
     {
       label: "Actualités",
-      href: "/news",
+      href: "#",
       subItems: [
         { label: "Nouvelles récentes", href: "/recent-news" },
         { label: "Événements à venir", href: "/upcoming-events" },
-        { label: "Séminaires", href: "/seminars" },
-        { label: "Conférences", href: "/conferences" },
       ],
     },
     {
