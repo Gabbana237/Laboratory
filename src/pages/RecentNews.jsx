@@ -7,7 +7,7 @@ const NewsCard = ({ title, date, category, image, summary, tags }) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-[1.02]">
     <div className="relative h-48 sm:h-56">
       <img 
-        src={image} 
+        src={image}
         alt={title}
         className="w-full h-full object-cover"
       />
