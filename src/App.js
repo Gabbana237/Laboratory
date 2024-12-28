@@ -5,6 +5,8 @@ import AboutPage from "./pages/AboutPage";
 import RecentNews from "./pages/RecentNews";
 import UpcomingEvents from "./pages/UpcomingEvents";
 import Team from "./pages/Team";
+import CurrentResearch from "./pages/CurrentResearch";
+import Projects from "./pages/Projects";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/recent-news" element={<RecentNews />} />
         <Route path="/upcoming-events" element={<UpcomingEvents />} />
+        <Route path="/current-research" element={<CurrentResearch />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/team" element={<Team />} />
       </Routes>
     </Router>

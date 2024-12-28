@@ -11,7 +11,7 @@ const NewsCard = ({ title, date, category, image, summary, tags }) => (
         alt={title}
         className="w-full h-full object-cover"
       />
-      <span className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-green-500 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
+      <span className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-darkGreen text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
         {category}
       </span>
     </div>
@@ -144,7 +144,7 @@ const RecentNews = () => {
                 key={filter}
                 className={`whitespace-nowrap px-3 py-2 rounded-full transition-colors duration-200 text-sm ${
                   activeFilter === filter 
-                    ? "bg-green-600 text-white" 
+                    ? "bg-darkGreen text-white" 
                     : "bg-white text-gray-600 hover:bg-green-50"
                 }`}
                 onClick={() => {
@@ -167,7 +167,7 @@ const RecentNews = () => {
 
         {/* Load More Button */}
         <div className="text-center">
-          <button className="w-full sm:w-auto inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors duration-200 text-sm sm:text-base">
+          <button className="w-full sm:w-auto inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-darkGreen text-white rounded-full hover:bg-darkGreen transition-colors duration-200 text-sm sm:text-base">
             Voir plus d'actualités
             <ChevronRight className="ml-2 w-4 h-4" />
           </button>
