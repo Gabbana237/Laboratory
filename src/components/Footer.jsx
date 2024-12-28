@@ -12,7 +12,7 @@ const Footer = () => {
             <div>
               <div className="flex items-center space-x-3 mb-2">
               <img src="/images/logoSite.png" alt="Logo du site" className="h-16 w-16 object-contain" />
-                <h3 className="text-lg font-bold">Situation du Laboratoire de Chimie</h3>
+                <h3 className="text-lg font-bold">URCHINCHE</h3>
               </div>
               <p><i class="fas fa-map-marker-alt"></i>  Porte <span className="font-bold text-darkGreen">417</span> du decanat de la faculte des sciences</p>
               <p><i class="fa fa-envelope"></i>   <a href="mailto:contact@laboratoire-chimir.com" className="underline decoration-darkGreen">contact@laboratoire-chimir.com</a></p>
@@ -23,18 +23,25 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-bold mb-2">Liens rapides</h3>
               <ul className="space-y-2">
+              <li>
+               
+               <a href="/" className="hover:text-darkGreen">
+                 Accueil
+               </a>
+             </li>
                 <li>
-                  <a href="about" className="hover:text-blue-400">
+               
+                  <a href="/about" className="hover:text-darkGreen">
                     À propos
                   </a>
                 </li>
                 <li>
-                  <a href="#services" className="hover:text-blue-400 ">
-                    Services
+                  <a href="/team" className="hover:text-darkGreen ">
+                    Team
                   </a>
                 </li>
                 <li>
-                  <a href="contact" className="hover:text-blue-400">
+                  <a href="contact" className="hover:text-darkGreen">
                     Contact
                   </a>
                 </li>

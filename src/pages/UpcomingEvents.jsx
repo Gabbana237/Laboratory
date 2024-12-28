@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Calendar, Clock, MapPin, Users, ChevronRight, Search, Tag, ExternalLink } from "lucide-react";
+import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag, ExternalLink } from "lucide-react";
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -56,7 +56,7 @@ const EventCard = ({ title, date, time, location, type, capacity, image, descrip
       {registrationLink && (
         <a
           href={registrationLink}
-          className="inline-flex items-center text-sm sm:text-base text-purple-600 hover:text-purple-700"
+          className="inline-flex items-center text-sm sm:text-base text-darkGreen hover:text-darkGreen"
         >
           S'inscrire
           <ExternalLink className="w-4 h-4 ml-1" />
@@ -71,7 +71,7 @@ const EventFilter = ({ icon: Icon, label, options, value, onChange }) => (
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="appearance-none w-full pl-8 pr-4 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+      className="appearance-none w-full pl-8 pr-4 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-darkGreen text-sm"
     >
       <option value="">{label}</option>
       {options.map((option) => (
@@ -154,7 +154,7 @@ const UpcomingEvents = () => {
       <Header/>
       <div className="bg-gradient-to-r from-darkGreen pt-24 text-dark py-8 sm:py-16">
         <div className="container mx-auto px-4">
-          <h1 className="text-2xl sm:text-4xl font-bold mb-4">Événements à venir</h1>
+          <h1 className="text-2xl sm:text-4xl mt-4 font-bold mb-4">Événements à venir</h1>
           <p className="text-lg sm:text-xl opacity-90 max-w-2xl">
             Découvrez nos prochains événements scientifiques, conférences et workshops
           </p>
@@ -163,59 +163,65 @@ const UpcomingEvents = () => {
 
       {/* Filters Section */}
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Rechercher un événement..."
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-          
-          <EventFilter
-            icon={Tag}
-            label="Type d'événement"
-            options={["Conférence", "Workshop", "Séminaire", "Événement Public"]}
-            value={typeFilter}
-            onChange={setTypeFilter}
-          />
-          
-          <EventFilter
-            icon={Calendar}
-            label="Mois"
-            options={["Janvier", "Février", "Mars", "Avril"]}
-            value={monthFilter}
-            onChange={setMonthFilter}
-          />
-        </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="relative">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+      <input
+        type="text"
+        placeholder="Rechercher un événement..."
+        className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-darkGreen"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+    </div>
 
-        {/* Events Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-          {filteredEvents.map((event, index) => (
-            <EventCard key={index} {...event} />
-          ))}
-        </div>
+    <div className="relative">
+      <EventFilter
+        icon={Tag}
+        label="Type d'événement"
+        options={["Conférence", "Workshop", "Séminaire", "Événement Public"]}
+        value={typeFilter}
+        onChange={setTypeFilter}
+      />
+      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+    </div>
 
-        {/* No Results Message */}
-        {filteredEvents.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Aucun événement ne correspond à vos critères de recherche</p>
-          </div>
-        )}
+    <div className="relative">
+      <EventFilter
+        icon={Calendar}
+        label="Mois"
+        options={["Janvier", "Février", "Mars", "Avril","Mai"]}
+        value={monthFilter}
+        onChange={setMonthFilter}
+      />
+      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+    </div>
+  </div>
 
-        {/* Load More Button */}
-        {filteredEvents.length > 0 && (
-          <div className="text-center mt-8">
-            <button className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors duration-200">
-              Voir plus d'événements
-              <ChevronRight className="ml-2 w-4 h-4" />
-            </button>
-          </div>
-        )}
-      </div>
+  {/* Events Grid */}
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+    {filteredEvents.map((event, index) => (
+      <EventCard key={index} {...event} />
+    ))}
+  </div>
+
+  {/* No Results Message */}
+  {filteredEvents.length === 0 && (
+    <div className="text-center py-12">
+      <p className="text-gray-500 text-lg">Aucun événement ne correspond à vos critères de recherche</p>
+    </div>
+  )}
+
+  {/* Load More Button */}
+  {filteredEvents.length > 0 && (
+    <div className="text-center mt-8">
+      <button className="inline-flex items-center px-6 py-3 bg-darkGreen text-white rounded-full hover:bg-darkGreen transition-colors duration-200">
+        Voir plus d'événements
+        <ChevronRight className="ml-2 w-4 h-4" />
+      </button>
+    </div>
+  )}
+</div>;
       <Footer/>
     </div>
   );
