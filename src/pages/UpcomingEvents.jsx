@@ -53,15 +53,7 @@ const EventCard = ({ title, date, time, location, type, capacity, image, descrip
         ))}
       </div>
       
-      {registrationLink && (
-        <a
-          href={registrationLink}
-          className="inline-flex items-center text-sm sm:text-base text-darkGreen hover:text-darkGreen"
-        >
-          S'inscrire
-          <ExternalLink className="w-4 h-4 ml-1" />
-        </a>
-      )}
+      
     </div>
   </div>
 );

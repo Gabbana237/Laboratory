@@ -21,11 +21,8 @@ const Header = () => {
     },
     {
       label: "Recherches",
-      href: "/research",
-      subItems: [
-        { label: "Recherches en cours", href: "/current-research" },
-        { label: "Projets", href: "/projects" },
-      ],
+      href: "/projects",
+     
     },
     {
       label: "Actualités",
