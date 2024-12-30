@@ -40,7 +40,7 @@ const Team = () => {
       <div className="container mx-auto py-5">
         <div className="flex justify-center space-x-5 border-b">
           <button
-            className={`py-2 px-4 text-sm lg:text-base ${
+            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
               activeTab === "responsables" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
             }`}
             onClick={() => setActiveTab("responsables")}
@@ -48,15 +48,15 @@ const Team = () => {
             Responsables
           </button>
           <button
-            className={`py-2 px-4 text-sm lg:text-base ${
+            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
               activeTab === "staff" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
             }`}
             onClick={() => setActiveTab("staff")}
           >
-             Staff Technique
+              Techniques
           </button>
           <button
-            className={`py-2 px-4 text-sm lg:text-base ${
+            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
               activeTab === "guest" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
             }`}
             onClick={() => setActiveTab("guest")}
@@ -64,7 +64,7 @@ const Team = () => {
            Invites
           </button>
           <button
-            className={`py-2 px-4 text-sm lg:text-base ${
+            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
               activeTab === "olders" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
             }`}
             onClick={() => setActiveTab("olders")}

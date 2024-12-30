@@ -98,7 +98,7 @@ const RecentNews = () => {
       <Header/>
       <div className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto py-4 px-4">
-          <h1 className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6">Actualités du Laboratoire</h1>
+          <h1 className=" text-xl md:text-2xl lg:text-4xl font-bold mt-8 mb-4 sm:mb-6">Actualités du Laboratoire</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
             {stats.map(({ icon: Icon, value, label }, index) => (
               <div key={index} className="flex items-center space-x-3 sm:space-x-4 bg-white/10 p-3 sm:p-4 rounded-lg">
