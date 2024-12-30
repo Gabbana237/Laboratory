@@ -146,7 +146,7 @@ const UpcomingEvents = () => {
       <Header/>
       <div className="bg-gradient-to-r from-darkGreen pt-24 text-dark py-8 sm:py-16">
         <div className="container mx-auto px-4">
-          <h1 className="text-2xl sm:text-4xl mt-4 font-bold mb-4">Événements à venir</h1>
+          <h1 className=" text-xl md:text-2xl lg:text-4xl mt-8 font-bold mb-4">Événements à venir</h1>
           <p className="text-lg sm:text-xl opacity-90 max-w-2xl">
             Découvrez nos prochains événements scientifiques, conférences et workshops
           </p>

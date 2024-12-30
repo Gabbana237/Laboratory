@@ -148,10 +148,10 @@ const Projects = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <Header/>
-      <div className="bg-gradient-to-r from-darkGreen pt-36 text-dark py-8 sm:py-16">
+      <div className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
-            <h1 className="text-2xl sm:text-4xl mt-4 font-bold mb-4">Projets de Recherche</h1>
+            <h1 className=" text-xl md:text-2xl lg:text-4xl mt-4 md:mt-8 lg:mt-8 font-bold mb-4">Projets de Recherche</h1>
             <p className="text-lg sm:text-xl opacity-90">
               Découvrez nos projets de recherche innovants en chimie et leurs impacts sur la science et la société
             </p>

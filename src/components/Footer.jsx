@@ -84,10 +84,14 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-8 text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Laboratoire de Chimie. Tous droits
-            réservés.
-          </div>
+<div className="mt-8 text-center text-sm text-gray-500">
+  © {new Date().getFullYear()} Laboratoire de Chimie. Tous droits
+  réservés.
+  <br />
+  Développé par <span className="text-darkGreen"><a href="mailto:hopedingammadji@gmail.com" className="">[Esperance]</a></span> et <span className="text-darkGreen"><a href="mailto:votreemail@example.com" className="">[Hamed]</a></span>.
+</div>
+
+
         </div>
       </div>
     </footer>
