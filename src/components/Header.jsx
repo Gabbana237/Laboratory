@@ -54,10 +54,10 @@ const Header = () => {
         <img
       src="/images/logoSite.png"
       alt="Logo du site"
-      className="h-14 w-14 object-contain"/> 
+      className="h-12 w-12 object-contain"/> 
       <span className="mx-2 font-bold text-xl">URCHINGE</span>
         </a>
-   </div>
+     </div>
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6">
           {navItems.map((item, index) => (

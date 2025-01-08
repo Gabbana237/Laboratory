@@ -16,7 +16,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="bg-white font-sans text-gray-800">
+    <div className="bg-gray-50 font-sans text-gray-800">
       {/* Header */}
       <Header/>
       <header

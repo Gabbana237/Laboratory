@@ -10,10 +10,10 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {/* Section Informations du laboratoire */}
             <div>
-              <div className="flex items-center space-x-3 mb-2">
+              <a href="/" className="flex items-center space-x-3 mb-2">
               <img src="/images/logoSite.png" alt="Logo du site" className="h-16 w-16 object-contain" />
                 <h3 className="text-lg font-bold">URCHINCHE</h3>
-              </div>
+              </a>
               <p><i class="fas fa-map-marker-alt"></i>  Porte <span className="font-bold text-darkGreen">417</span> du decanat de la faculte des sciences</p>
               <p><i class="fa fa-envelope"></i>   <a href="mailto:contact@laboratoire-chimir.com" className="underline decoration-darkGreen">contact@laboratoire-chimir.com</a></p>
               <p><i className="fa-phone fa "></i>  +237 6 86 36 23 76</p>
