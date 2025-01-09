@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const location = useLocation(); // Get the current URL path
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,7 +24,6 @@ const Header = () => {
     {
       label: "Recherches",
       href: "/projects",
-     
     },
     {
       label: "Actualités",
@@ -37,7 +38,7 @@ const Header = () => {
       href: "/team",
     },
     {
-      label: "A propos",
+      label: "À propos",
       href: "/about",
     },
     {
@@ -49,35 +50,45 @@ const Header = () => {
   return (
     <header className="absolute top-0 left-0 w-full z-50 backdrop-blur-sm bg-white/5">
       <div className="container mx-auto flex items-center justify-between p-4">
-      <div className="">
-        <a className="flex items-center" href="/">
-        <img
-      src="/images/logoSite.png"
-      alt="Logo du site"
-      className="h-14 w-14 object-contain"/> 
-      <span className="mx-2 font-bold text-xl">URCHINGE</span>
-        </a>
-   </div>
+        <div>
+          <a className="flex items-center" href="/">
+            <img
+              src="/images/logoSite.png"
+              alt="Logo du site"
+              className="h-14 w-14 object-contain"
+            />
+            <span className="mx-2 font-bold text-xl">URCHINGE</span>
+          </a>
+        </div>
+
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6">
           {navItems.map((item, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="relative group"
               onMouseLeave={() => setTimeout(() => setActiveDropdown(null), 200)}
             >
               <a
                 href={item.href}
-                className="flex items-center gap-1 text-darkGreen hover:text-green-700 py-2"
+                className={`flex items-center gap-1 py-2 text-darkGreen hover:text-green-700 ${
+                  location.pathname === item.href
+                    ? "font-bold underline decoration-green-500 decoration-2"
+                    : "no-underline"
+                }`}
                 onMouseEnter={() => item.subItems && setActiveDropdown(index)}
               >
                 {item.label}
                 {item.subItems?.length > 0 && (
-                  <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      activeDropdown === index ? "rotate-180" : ""
+                    }`}
+                  />
                 )}
               </a>
               {item.subItems && activeDropdown === index && (
-                <div 
+                <div
                   className="absolute left-0 mt-0 w-64 bg-white shadow-lg rounded-lg border border-gray-100"
                   onMouseEnter={() => setActiveDropdown(index)}
                 >
@@ -86,7 +97,11 @@ const Header = () => {
                       <a
                         key={subIndex}
                         href={subItem.href}
-                        className="block px-4 py-3 text-sm hover:bg-green-50 text-black transition-colors duration-150"
+                        className={`block px-4 py-3 text-sm hover:bg-green-50 text-black transition-colors duration-150 ${
+                          location.pathname === subItem.href
+                            ? "font-bold underline decoration-green-500 decoration-2"
+                            : "no-underline"
+                        }`}
                       >
                         {subItem.label}
                       </a>
@@ -116,7 +131,11 @@ const Header = () => {
                 <div className="flex justify-between items-center py-2">
                   <a
                     href={item.href}
-                    className="text-darkGreen font-medium hover:text-green-700"
+                    className={`text-darkGreen font-medium hover:text-green-700 ${
+                      location.pathname === item.href
+                        ? "font-bold underline decoration-green-500 decoration-2"
+                        : "no-underline"
+                    }`}
                   >
                     {item.label}
                   </a>
@@ -139,7 +158,11 @@ const Header = () => {
                       <a
                         key={subIndex}
                         href={subItem.href}
-                        className="block py-3 text-sm text-darkGreen hover:bg-green-50 rounded"
+                        className={`block py-3 text-sm text-darkGreen hover:bg-green-50 rounded ${
+                          location.pathname === subItem.href
+                            ? "font-bold underline decoration-green-500 decoration-2"
+                            : "no-underline"
+                        }`}
                       >
                         {subItem.label}
                       </a>

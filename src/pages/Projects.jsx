@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Beaker, Users, Clock, ChevronRight, Search, Tag, ExternalLink, Globe, Microscope, Atom } from "lucide-react";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import absorpImage from  '../images/chimieabsop.jpg';
 const ProjectCard = ({ title, status, domain, team, duration, image, description, keywords, partners, publications }) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <div className="relative h-48 sm:h-56">
@@ -86,10 +87,10 @@ const Projects = () => {
     {
       title: "Développement de nouveaux catalyseurs pour la synthèse asymétrique",
       status: "En cours",
-      domain: "Catalyse",
+      domain: "Chimie organique",
       team: 8,
       duration: "2023-2026",
-      image: "/api/placeholder/800/400",
+      image: absorpImage,
       description: "Recherche sur des catalyseurs innovants permettant une meilleure sélectivité dans les réactions de synthèse asymétrique.",
       keywords: ["Catalyse asymétrique", "Chimie verte", "Synthèse organique"],
       publications: "#"
@@ -97,10 +98,10 @@ const Projects = () => {
     {
       title: "Étude des mécanismes de dégradation des polymères biodégradables",
       status: "En cours",
-      domain: "Polymères",
+      domain: "Chimie computationnelle",
       team: 5,
       duration: "2024-2025",
-      image: "/api/placeholder/800/400",
+      image: absorpImage,
       description: "Analyse approfondie des mécanismes de dégradation des polymères biodégradables en conditions environnementales.",
       keywords: ["Polymères", "Environnement", "Analyse structurale"],
       
@@ -109,10 +110,10 @@ const Projects = () => {
     {
       title: "Nouveaux matériaux pour le stockage d'hydrogène",
       status: "Terminé",
-      domain: "Matériaux",
+      domain: "Chimie des Matériaux",
       team: 6,
       duration: "2022-2024",
-      image: "/api/placeholder/800/400",
+      image: absorpImage,
       description: "Développement de matériaux nanoporeux innovants pour le stockage efficace de l'hydrogène.",
       keywords: ["Hydrogène", "Matériaux", "Énergie propre"],
       
@@ -121,10 +122,10 @@ const Projects = () => {
     {
       title: "Synthèse de molécules bioactives pour applications pharmaceutiques",
       status: "En préparation",
-      domain: "Pharmacologie",
+      domain: "Chimie de l'absorption",
       team: 4,
       duration: "2025-2027",
-      image: "/api/placeholder/800/400",
+      image:absorpImage,
       description: "Projet de synthèse de nouvelles molécules bioactives ciblant des pathologies spécifiques.",
       keywords: ["Pharmacologie", "Synthèse", "Molécules bioactives"],
       
