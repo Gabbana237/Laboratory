@@ -10,10 +10,10 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {/* Section Informations du laboratoire */}
             <div>
-              <div className="flex items-center space-x-3 mb-2">
+              <a href="/" className="flex items-center space-x-3 mb-2">
               <img src="/images/logoSite.png" alt="Logo du site" className="h-16 w-16 object-contain" />
                 <h3 className="text-lg font-bold">URCHINCHE</h3>
-              </div>
+              </a>
               <p><i class="fas fa-map-marker-alt"></i>  Porte <span className="font-bold text-darkGreen">417</span> du decanat de la faculte des sciences</p>
               <p><i class="fa fa-envelope"></i>   <a href="mailto:contact@laboratoire-chimir.com" className="underline decoration-darkGreen">contact@laboratoire-chimir.com</a></p>
               <p><i className="fa-phone fa "></i>  +237 6 86 36 23 76</p>
@@ -53,28 +53,24 @@ const Footer = () => {
               <h3 className="text-lg font-bold mb-2">Suivez-nous</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-500 flex items-center space-x-2"
+                
+                  className="hover:text-blue-500 flex cursor-pointer items-center space-x-2"
                 >
                   <i className="fab fa-facebook fa-lg"></i>
                   <span>Facebook</span>
                 </a>
                 <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-400 flex items-center space-x-2"
+             
+                  className="hover:text-blue-400 flex cursor-pointer items-center space-x-2"
                 >
                   <i className="fab fa-twitter fa-lg"></i>
                   <span>Twitter</span>
                 </a>
                 <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-pink-400 flex items-center space-x-2"
+                 
+            
+                 
+                  className="hover:text-pink-400 flex items-center cursor-pointer space-x-2"
                 >
                   <i className="fab fa-instagram fa-lg"></i>
                   <span>Instagram</span>

@@ -7,6 +7,7 @@ import UpcomingEvents from "./pages/UpcomingEvents";
 import Team from "./pages/Team";
 import CurrentResearch from "./pages/CurrentResearch";
 import Projects from "./pages/Projects";
+import Equipments from "./pages/Equipments";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/current-research" element={<CurrentResearch />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/equipment" element={<Equipments />} />
       </Routes>
     </Router>
   );
