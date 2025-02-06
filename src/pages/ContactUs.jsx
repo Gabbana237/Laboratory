@@ -1,8 +1,49 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useState } from 'react';
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    nom: "",
+    email: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/contact-us", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ nom: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+        console.error("Erreur :", data.errors);
+      }
+    } catch (error) {
+      setStatus("error");
+      console.error("Erreur lors de l'envoi :", error);
+    }
+  };
+
   return (
     <div className="bg-lightGray flex flex-col">
       <Header />
@@ -45,26 +86,44 @@ const ContactUs = () => {
   {/* Section formulaire (à gauche) */}
   <div className="bg-white p-8 rounded-lg shadow-[0_4px_6px_-1px_rgba(34,139,34,0.6)] w-full lg:w-1/2">
     <h2 className="text-2xl font-bold text-darkGreen mb-4 text-center">Contactez-nous</h2>
-    <form>
-      <input
-        type="text"
-        placeholder="Entrez votre nom"
-        className="w-full p-2 text-sm mb-3 border border-gray-300 rounded focus:outline-none focus:ring-darkGreen focus:border-transparent focus:ring-2"
-      />
-      <input
-        type="email"
-        placeholder="Entrez une adresse e-mail valide"
-        className="w-full p-2 text-sm mb-3 border border-gray-300 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-darkGreen"
-      />
-      <textarea
-        placeholder="Votre message"
-        className="w-full p-2 text-sm mb-3 border border-gray-300 rounded h-24 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-darkGreen"
-      ></textarea>
-      <button className="bg-darkGreen text-white px-4 py-2 rounded hover:bg-green-700 w-full">
-        ENVOYER
-      </button>
-    </form>
-  </div>
+    <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="nom"
+              placeholder="Entrez votre nom"
+              className="w-full p-2 text-sm mb-3 border rounded focus:outline-none"
+              value={formData.nom}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Entrez une adresse e-mail valide"
+              className="w-full p-2 text-sm mb-3 border rounded focus:outline-none"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Votre message"
+              className="w-full p-2 text-sm mb-3 border rounded h-24 focus:outline-none"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-darkGreen text-white px-4 py-2 rounded hover:bg-green-700 w-full"
+            >
+              ENVOYER
+            </button>
+          </form>
+          {status === "loading" && <p className="text-blue-500">Envoi en cours...</p>}
+          {status === "success" && <p className="text-green-500">Message envoyé avec succès !</p>}
+          {status === "error" && <p className="text-red-500">Erreur lors de l'envoi.</p>}
+        </div>
 
   {/* Section carte Google (à droite) */}
   <div className="w-full lg:w-1/2">

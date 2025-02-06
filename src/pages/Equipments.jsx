@@ -6,7 +6,7 @@ const Equipments = () => {
     const [selectedImage, setSelectedImage] = useState(null); // État pour l'image sélectionnée
 
     useEffect(() => {
-        fetch("http://192.168.43.91:8000/api/equipments")
+        fetch("http://127.0.0.1:8000/api/equipments")
             .then((response) => response.json())
             .then((data) => setEquipments(data))
             .catch((error) =>
