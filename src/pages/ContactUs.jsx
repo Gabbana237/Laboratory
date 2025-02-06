@@ -88,16 +88,16 @@ const ContactUs = () => {
       <div className="mt-10 text-center text-dark">
         <h3 className="text-lg font-bold mb-4">Suivez-nous sur</h3>
         <div className="flex justify-center space-x-6 text-2xl">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <a  target="_blank" rel="noopener noreferrer">
             <FaFacebook className="hover:text-blue-500" />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <a target="_blank" rel="noopener noreferrer">
             <FaTwitter className="hover:text-blue-400" />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <a  target="_blank" rel="noopener noreferrer">
             <FaInstagram className="hover:text-pink-400" />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <a target="_blank" rel="noopener noreferrer">
             <FaLinkedin className="hover:text-blue-700" />
           </a>
         </div>

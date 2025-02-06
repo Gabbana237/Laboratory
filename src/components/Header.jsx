@@ -27,7 +27,7 @@ const Header = () => {
     },
     {
       label: "Actualités",
-      href: "#",
+      
       subItems: [
         { label: "Nouvelles récentes", href: "/recent-news" },
         { label: "Événements à venir", href: "/upcoming-events" },
@@ -36,6 +36,10 @@ const Header = () => {
     {
       label: "Équipe",
       href: "/team",
+    },
+    {
+      label: "Équipement",
+      href: "/equipment",
     },
     {
       label: "À propos",

@@ -10,11 +10,7 @@ const Team = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
 
-  const invitedStudents = [
-    { id: 1, name: "Alice", date: "2024", details: "Ingénieur en aéronautique, travaillant sur des projets de drones autonomes." },
-    { id: 2, name: "Bob", date: "2024", details: "Invité pour le hackathon annuel." },
-    { id: 3, name: "Charlie", date: "2024", details: "Participation à un séminaire." },
-  ];
+ 
   const invitedStudents2 = [
     {
       id: 1,
@@ -66,14 +62,7 @@ const Team = () => {
           >
             Responsables
           </button>
-          <button
-            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
-              activeTab === "guest" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
-            }`}
-            onClick={() => setActiveTab("guest")}
-          >
-           Les invites
-          </button>
+        
           <button
             className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
               activeTab === "oldersStudent" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
@@ -180,98 +169,6 @@ const Team = () => {
           
         )}
 
-       
-{activeTab === "guest" && (
-  <div>
-    <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">
-      Les Étudiants Invités
-    </h2>
-    <div className="mb-4">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Filtrer par année :
-      </label>
-      <select
-        className="block w-full px-4 py-2 border border-darkGreen rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        value={selectedGuestDate}
-        onChange={(e) => setSelectedGuestDate(e.target.value)}
-      >
-        <option value="">Toutes les années</option>
-        {Array.from({ length: 10 }, (_, index) => new Date().getFullYear() - index).map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {invitedStudents
-        .filter((student) => !selectedGuestDate || student.date.startsWith(selectedGuestDate))
-        .map((student) => (
-          <div key={student.id} className="bg-white shadow-xl rounded-lg p-6 text-left border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
-            <div className="flex items-center mb-4">
-              <img
-                src={student.profileImage || "/images/me.jpg"} // Placeholder si aucune image n'est fournie
-                alt={`${student.name} Profile`}
-                className="w-16 h-16 rounded-full object-cover border border-gray-300"
-              />
-              <div className="ml-4">
-                <h3 className="text-lg font-semibold text-darkGreen">{student.name}</h3>
-                <p className="text-sm text-gray-600 font-medium">
-                  Année : {student.date.split("-")[0]}
-                </p>
-              </div>
-            </div>
-            <p className="text-gray-700 text-sm mb-4">{student.details}</p>
-            <button
-              className="bg-darkGreen text-white px-4 py-1 rounded-lg transition-colors duration-300 w-full"
-              onClick={() => {
-                setSelectedStudent(student);
-                setIsModalOpen(true);
-              }}
-            >
-              Plus d'informations <span></span>
-            </button>
-          </div>
-        ))}
-    </div>
-  </div>
-)}
-
-
-{isModalOpen && selectedStudent && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg relative">
-      <button
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-        onClick={() => setIsModalOpen(false)}
-      >
-        <i className="fas fa-times"></i>
-      </button>
-      <div className="flex items-center mb-6">
-        <img
-          src={selectedStudent.profileImage || "/images/me.jpg"}
-          alt={`${selectedStudent.name} Profile`}
-          className="w-20 h-20 rounded-full object-cover border border-gray-300"
-        />
-        <div className="ml-6">
-          <h3 className="text-2xl font-bold text-darkGreen">{selectedStudent.name}</h3>
-          <p className="text-sm text-gray-600">Année : {selectedStudent.date.split("-")[0]}</p>
-        </div>
-      </div>
-      <p className="text-gray-700 mb-4">{selectedStudent.details}</p>
-      
-      <div className="mt-6">
-        <div className="bg-gray-100 p-4 rounded-lg mt-4">
-          <p className="text-gray-600 text-sm">Email : <span className="font-medium">sophie.martin@example.com</span></p>
-          <p className="text-gray-600 text-sm">Affiliation : <span className="font-medium">Université de Chimie de Paris</span></p>
-          <p className="text-gray-600 text-sm">Objet de la visite : <span className="font-medium">Recherche sur les composés organiques</span></p>
-          <p className="text-gray-600 text-sm">Date de la visite : <span className="font-medium">15 février 2025</span></p>
-          <p className="text-gray-600 text-sm">Téléphone : <span className="font-medium">01 23 45 67 89</span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
 
 {activeTab === "oldersStudent" && (
   <div>
@@ -296,7 +193,7 @@ const Team = () => {
       </select>
     </div>
 
-    {["Doctorant", "Masterien", "Docteur"].map((type) => {
+    {["Masterien", "Docteur"].map((type) => {
       const filteredStudents = invitedStudents2
         .filter((student) => student.type === type)
         .filter(
@@ -330,20 +227,12 @@ const Team = () => {
                       </p>
                     </div>
                   </div>
-                  <p className="text-gray-700 text-sm mb-4">
-                    <strong>Domaine de recherche :</strong> {student.researchField || "Non spécifié"}
-                  </p>
-                  <p className="text-gray-700 text-sm mb-4">
-                    <strong>Description :</strong> {student.details || "Aucune description disponible."}
-                  </p>
-                  <a
-                    href={student.profileLink || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => setSelectedStudent(student)}
                     className="text-blue-500 text-sm hover:underline"
                   >
                     En savoir plus
-                  </a>
+                  </button>
                 </div>
               ))}
             </div>
@@ -353,19 +242,56 @@ const Team = () => {
         </div>
       );
     })}
+
+    {/* Modale */}
+    {selectedStudent && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-3/4 lg:w-1/2 relative">
+          {/* Bouton de fermeture */}
+          <button
+            onClick={() => setSelectedStudent(null)}
+            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl"
+          >
+            &times;
+          </button>
+
+          {/* Contenu du modale */}
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Photo */}
+            <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-6">
+              <img
+                src={selectedStudent.profileImage || "/images/me.jpg"}
+                alt={`${selectedStudent.name} Profile`}
+                className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border border-gray-300 shadow-lg"
+              />
+            </div>
+
+            {/* Détails */}
+            <div className="flex-grow text-left">
+              <h3 className="text-2xl font-bold text-darkGreen mb-4">
+                {selectedStudent.name}
+              </h3>
+              <p className="text-gray-700 text-sm mb-2">
+                <strong>Poste :</strong> {selectedStudent.position || "Non spécifié"}
+              </p>
+              <p className="text-gray-700 text-sm mb-2">
+                <strong>Année :</strong> {selectedStudent.date.split("-")[0]}
+              </p>
+              <p className="text-gray-700 text-sm mb-2">
+                <strong>Domaine de recherche :</strong>{" "}
+                {selectedStudent.researchField || "Non spécifié"}
+              </p>
+              <p className="text-gray-700 text-sm">
+                <strong>Description :</strong>{" "}
+                {selectedStudent.details || "Aucune description disponible."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
   </div>
 )}
-
-
-
-
-
-
-
-
-
-
-
 
 
 

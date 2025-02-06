@@ -19,24 +19,16 @@ const AboutPage = () => {
     <div className="bg-gray-50 font-sans text-gray-800">
       {/* Header */}
       <Header/>
-      <header
-  className="relative bg-gradient-to-r from-darkGreen to-green-500 pt-20 mt-16 text-dark py-8 sm:py-16"
-  style={{
-    backgroundImage: "url('/images/logoSite.png')",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    backgroundSize: "contain",
-  }}
->
-  <div className="container mx-auto text-center relative z-10">
-    <h1 className="text-xl md:text-2xl lg:text-4xl font-bold pt-8 md:pt-12 lg:pt-16">
-      À propos de notre laboratoire
-    </h1>
-    <p className="mt-2 text-sm lg:text-lg">
-      Découvrez notre histoire, nos valeurs et notre équipement de pointe.
-    </p>
-  </div>
-</header>
+    <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
+      <div className="container mx-auto text-center relative z-10">
+          <h1 className="text-xl md:text-2xl lg:text-4xl font-bold pt-8 md:pt-12 lg:pt-16">
+            À propos de notre laboratoire
+          </h1>
+          <p className="mt-2 text-sm lg:text-lg">
+            Découvrez notre histoire, nos valeurs et notre équipement de pointe.
+          </p>
+        </div>
+      </header>
 
 
 
@@ -60,15 +52,6 @@ const AboutPage = () => {
           >
             Valeurs
           </button>
-          <button
-            className={`py-2 text-sm px-2 lg:px-4 ${
-              activeTab === "equipment" ? "border-b-4 border-darkGreen font-bold" : ""
-            }`}
-            onClick={() => setActiveTab("equipment")}
-          >
-            Équipements
-          </button>
-
         </div>
       
         
@@ -81,7 +64,7 @@ const AboutPage = () => {
             <h2 className="text-3xl font-bold text-darkGreen mb-5">Historique</h2>
             <div className="flex flex-col md:flex-row items-center gap-5">
               <img
-                src="/images/equipement2.jpg"
+                src="/images/logoSite.png"
                 alt="Image du laboratoire"
                 className="rounded-lg shadow-lg w-full md:w-1/2"
               />
@@ -132,23 +115,6 @@ const AboutPage = () => {
                 Innovation continue pour répondre aux défis de demain.
               </li>
             </ul>
-          </div>
-        )}
-     {activeTab === "equipment" && (
-          <div>
-            <h2 className="text-3xl font-bold text-darkGreen mb-5">Équipements</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-            {equipmentImages.map((equipment, index) => (
-            <div key={index} className="text-center">
-              <img
-                src={equipment.src}
-                alt={equipment.alt}
-                className=" w-full sm:w-52 h-52 object-cover rounded-lg shadow-lg mx-auto"
-              />
-              <p className="mt-2 text-lg font-semibold">{equipment.alt}</p>
-            </div>
-          ))}
-            </div>
           </div>
         )}
       </div>

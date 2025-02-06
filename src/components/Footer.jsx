@@ -53,28 +53,21 @@ const Footer = () => {
               <h3 className="text-lg font-bold mb-2">Suivez-nous</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-500 flex items-center space-x-2"
+                
+                  className="hover:text-blue-500 flex cursor-pointer items-center space-x-2"
                 >
                   <i className="fab fa-facebook fa-lg"></i>
                   <span>Facebook</span>
                 </a>
                 <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-400 flex items-center space-x-2"
+             
+                  className="hover:text-blue-400 flex cursor-pointer items-center space-x-2"
                 >
                   <i className="fab fa-twitter fa-lg"></i>
                   <span>Twitter</span>
                 </a>
                 <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-pink-400 flex items-center space-x-2"
+                  className="hover:text-pink-400 flex items-center cursor-pointer space-x-2"
                 >
                   <i className="fab fa-instagram fa-lg"></i>
                   <span>Instagram</span>
@@ -84,12 +77,12 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-<div className="mt-8 text-center text-sm text-gray-500">
-  © {new Date().getFullYear()} Laboratoire de Chimie. Tous droits
-  réservés.
-  <br />
-  Développé par <span className="text-darkGreen"><a href="mailto:hopedingammadji@gmail.com" className="">[Esperance]</a></span> et <span className="text-darkGreen"><a href="mailto:votreemail@example.com" className="">[Hamed]</a></span>.
-</div>
+        <div className="mt-8 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} Laboratoire de Chimie. Tous droits
+          réservés.
+          <br />
+          Développé par <span className="text-darkGreen"><a href="mailto:hopedingammadji@gmail.com" className="">[Esperance]</a></span> et <span className="text-darkGreen"><a href="mailto:votreemail@example.com" className="">[Hamed]</a></span>.
+        </div>
 
 
         </div>

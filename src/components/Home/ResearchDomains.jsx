@@ -83,8 +83,7 @@ const ResearchDomains = () => {
               <div className="mt-6 inline-block text-gray-800 hover:text-gray-100 rounded-lg border-darkGreen shadow-md hover:bg-darkGreen transition">
               <a 
                 href={domain.link}
-                className="p-2"
-              >
+                className="p-2" >
                 En savoir plus
               </a>
               <p className="bg-darkGreen p-[0.1rem]"></p>
