@@ -23,7 +23,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/team" element={<Team />} />
         <Route path="/equipment" element={<Equipments />} />
-        <Route path="/chimie-organique" element={<ResearchUnitePage />} />
+        <Route path="/research" element={<ResearchUnitePage />} />
       </Routes>
     </Router>
   );
