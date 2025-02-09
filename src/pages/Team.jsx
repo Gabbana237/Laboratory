@@ -1,82 +1,45 @@
-import React, { useState } from "react";
 import Header from "../components/Header";
-import Footer from '../components/Footer';
+import Footer from "../components/Footer";
+import { useState, useEffect } from "react";
 
 const Team = () => {
   const [activeTab, setActiveTab] = useState("responsables");
   const [selectedGuestDate, setSelectedGuestDate] = useState("");
-  const [selectedOldStudentDate, setSelectedOldStudentDate] = useState("");
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [invitedStudents, setInvitedStudents] = useState([]);
 
- 
-  const invitedStudents2 = [
-    {
-      id: 1,
-      type: "Doctorant",
-      date: "2025-02-15",
-      name: "Jean Dupont",
-      details: "Recherche en intelligence artificielle.",
-      profileImage: "/images/me.jpg",
-    },
-    {
-      id: 2,
-      type: "Masterien",
-      date: "2024-11-10",
-      name: "Marie Curie",
-      details: "Études sur les rayonnements.",
-      profileImage: "/images/me.jpg",
-    },
-  ];
-  
-  
-  const oldStudents = [
-    { id: 1, name: "David", date: "2023", details: "Ancien diplômé, ingénieur logiciel." },
-    { id: 2, name: "Eva", date: "2022", details: "Actuellement en master en IA." },
-    { id: 3, name: "Frank", date: "2021", details: "Consultant en technologie." },
-  ];
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/anciens-etudiants")
+      .then((response) => response.json())
+      .then((data) => setInvitedStudents(data))
+      .catch((error) => console.error("Erreur lors du chargement des étudiants:", error));
+  }, []);
 
-  
+  const filteredStudents = invitedStudents.filter((student) => {
+    if (!selectedGuestDate) return true;
+    return student.annee_debut <= selectedGuestDate && student.annee_sortie >= selectedGuestDate;
+  });
+
   return (
     <div className="bg-gray-100 font-sans text-gray-800">
-      {/* Header */}
       <Header />
       <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto text-center">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen pt-4 md:pt-6 lg:pt-10">Notre Équipe</h1>
-          <p className="mt-4 text-sm lg:text-lg text-gray-600">
-            Découvrez les professionnels qui dirigent et soutiennent notre laboratoire.
-          </p>
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen pt-4 md:pt-6 lg:pt-10">
+            Notre Équipe
+          </h1>
         </div>
       </header>
 
-      {/* Tabs Navigation */}
       <div className="container mx-auto py-5">
         <div className="flex justify-center space-x-5 border-b">
-          <button
-            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
-              activeTab === "responsables" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
-            }`}
-            onClick={() => setActiveTab("responsables")}
-          >
-            Responsables
-          </button>
-        
-          <button
-            className={`py-2 px-1  lg:px-4 text-sm lg:text-base ${
-              activeTab === "oldersStudent" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"
-            }`}
-            onClick={() => setActiveTab("oldersStudent")}
-          >
-           Ancien Etudiants
-          </button>
+          <button className={`py-2 px-4 text-sm lg:text-base ${activeTab === "responsables" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"}`} onClick={() => setActiveTab("responsables")}>Responsables</button>
+          <button className={`py-2 px-4 text-sm lg:text-base ${activeTab === "oldersStudent" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"}`} onClick={() => setActiveTab("oldersStudent")}>Anciens Étudiants</button>
         </div>
       </div>
 
-      {/* Tab Content */}
       <div className="container mx-auto py-10 px-5">
-        {activeTab === "responsables" && (
+      {activeTab === "responsables" && (
           <div>
             <h2 className="text-2xl md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">Responsables</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -168,136 +131,55 @@ const Team = () => {
        </div>
           
         )}
+        
+        {activeTab === "oldersStudent" && (
+          <div>
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">Les Anciens Étudiants</h2>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filtrer par année :</label>
+              <select className="block w-full px-4 py-2 border border-darkGreen rounded-lg shadow-sm" value={selectedGuestDate} onChange={(e) => setSelectedGuestDate(e.target.value)}>
+                <option value="">Toutes les années</option>
+                {Array.from({ length: 10 }, (_, index) => new Date().getFullYear() - index).map((year) => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
+            </div>
 
-
-{activeTab === "oldersStudent" && (
-  <div>
-    <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">
-      Les Étudiants et Chercheurs Invités
-    </h2>
-    <div className="mb-4">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Filtrer par année :
-      </label>
-      <select
-        className="block w-full px-4 py-2 border border-darkGreen rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        value={selectedGuestDate}
-        onChange={(e) => setSelectedGuestDate(e.target.value)}
-      >
-        <option value="">Toutes les années</option>
-        {Array.from({ length: 10 }, (_, index) => new Date().getFullYear() - index).map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-    </div>
-
-    {["Masterien", "Docteur"].map((type) => {
-      const filteredStudents = invitedStudents2
-        .filter((student) => student.type === type)
-        .filter(
-          (student) =>
-            !selectedGuestDate || student.date.startsWith(selectedGuestDate)
-        );
-
-      return (
-        <div key={type} className="mb-8">
-          <h3 className="text-xl font-semibold text-darkGreen mb-4">{type}s</h3>
-          {filteredStudents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredStudents.map((student) => (
-                <div
-                  key={student.id}
-                  className="bg-white shadow-xl rounded-lg p-6 text-left border border-gray-200 hover:shadow-2xl transition-shadow duration-300"
-                >
+                <div key={student.id} className="bg-white shadow-xl rounded-lg p-6 border hover:shadow-2xl transition-shadow duration-300">
                   <div className="flex items-center mb-4">
-                    <img
-                      src={student.profileImage || "/images/me.jpg"}
-                      alt={`${student.name} Profile`}
-                      className="w-16 h-16 rounded-full object-cover border border-gray-300"
-                    />
+                    <img src={student.photo ? `http://127.0.0.1:8000/storage/${student.photo}` : "/images/me.jpg"} alt={`${student.nom} ${student.prenom}`} className="w-16 h-16 rounded-full object-cover border border-gray-300" />
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-darkGreen">{student.name}</h3>
-                      <p className="text-sm text-gray-600 font-medium">
-                        Année : {student.date.split("-")[0]}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Poste : {student.position || "Non spécifié"}
-                      </p>
+                      <h3 className="text-lg font-semibold text-darkGreen">{student.nom} {student.prenom}</h3>
+                      <p className="text-sm text-gray-600">{student.annee_debut} - {student.annee_sortie}</p>
                     </div>
                   </div>
-                  <button
-                    onClick={() => setSelectedStudent(student)}
-                    className="text-blue-500 text-sm hover:underline"
-                  >
-                    En savoir plus
-                  </button>
+                  <p className="text-sm text-gray-700">{student.description?.slice(0, 100)}... <span className="text-blue-500 cursor-pointer" onClick={() => setSelectedStudent(student)}>Voir plus</span></p>
                 </div>
               ))}
             </div>
-          ) : (
-            <p className="text-gray-600">Aucun {type} trouvé pour cette période.</p>
-          )}
-        </div>
-      );
-    })}
 
-    {/* Modale */}
-    {selectedStudent && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-3/4 lg:w-1/2 relative">
-          {/* Bouton de fermeture */}
-          <button
-            onClick={() => setSelectedStudent(null)}
-            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl"
-          >
-            &times;
-          </button>
-
-          {/* Contenu du modale */}
-          <div className="flex flex-col md:flex-row items-center">
-            {/* Photo */}
-            <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-6">
-              <img
-                src={selectedStudent.profileImage || "/images/me.jpg"}
-                alt={`${selectedStudent.name} Profile`}
-                className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border border-gray-300 shadow-lg"
-              />
-            </div>
-
-            {/* Détails */}
-            <div className="flex-grow text-left">
-              <h3 className="text-2xl font-bold text-darkGreen mb-4">
-                {selectedStudent.name}
-              </h3>
-              <p className="text-gray-700 text-sm mb-2">
-                <strong>Poste :</strong> {selectedStudent.position || "Non spécifié"}
-              </p>
-              <p className="text-gray-700 text-sm mb-2">
-                <strong>Année :</strong> {selectedStudent.date.split("-")[0]}
-              </p>
-              <p className="text-gray-700 text-sm mb-2">
-                <strong>Domaine de recherche :</strong>{" "}
-                {selectedStudent.researchField || "Non spécifié"}
-              </p>
-              <p className="text-gray-700 text-sm">
-                <strong>Description :</strong>{" "}
-                {selectedStudent.details || "Aucune description disponible."}
-              </p>
-            </div>
+            {selectedStudent && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-3/4 lg:w-1/2 relative">
+                  <button onClick={() => setSelectedStudent(null)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                  <div className="flex flex-col md:flex-row items-center">
+                    <img src={selectedStudent.photo ? `http://127.0.0.1:8000/storage/${selectedStudent.photo}` : "/images/me.jpg"} alt={selectedStudent.nom} className="w-40 h-40 rounded-full object-cover border border-gray-300" />
+                    <div className="ml-6">
+                      <h3 className="text-2xl font-bold text-darkGreen mb-4">{selectedStudent.nom} {selectedStudent.prenom}</h3>
+                      <p className="text-gray-700"><strong>Année :</strong> {selectedStudent.annee_debut} - {selectedStudent.annee_sortie}</p>
+                      <p className="text-gray-700"><strong>Description :</strong> {selectedStudent.description}</p>
+                      <p className="text-gray-700"><strong>Email :</strong> {selectedStudent.email}</p>
+                      <p className="text-gray-700"><strong>Téléphone :</strong> {selectedStudent.telephone}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+        )}
       </div>
-    )}
-  </div>
-)}
-
-
-
-      </div>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
