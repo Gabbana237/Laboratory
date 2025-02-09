@@ -4,10 +4,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const ProjectCard = ({ title, status, domain, team, duration, image, description, keywords, partners, publications }) => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+ <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <div className="relative h-48 sm:h-56">
+      
       <img 
-        src={image} 
+        src= {`http://127.0.0.1:8000/storage/${image}`} 
         alt={title}
         className="w-full h-full object-cover"
       />
@@ -90,6 +91,8 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/projects");
+       
+
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -132,6 +135,8 @@ const Projects = () => {
   if (error) {
     return <div className="text-center py-12 text-red-500">Erreur: {error}</div>;
   }
+  console.log(projects);
+
 
   return (
     <div className="min-h-screen bg-gray-50">
