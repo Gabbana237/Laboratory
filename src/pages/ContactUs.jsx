@@ -10,7 +10,8 @@ const ContactUs = () => {
     message: "",
   });
 
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState(null); // Can be "loading", "success", or "error"
+  const [errorMessage, setErrorMessage] = useState(""); // Store specific error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,6 +20,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
+    setErrorMessage(""); // Clear previous error messages
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/contact-us", {
@@ -32,14 +34,23 @@ const ContactUs = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Success: Reset form and show success message
         setStatus("success");
         setFormData({ nom: "", email: "", message: "" });
       } else {
+        // Handle validation or server errors
         setStatus("error");
-        console.error("Erreur :", data.errors);
+        if (data.errors) {
+          // If the API returns validation errors
+          setErrorMessage(Object.values(data.errors).join(", "));
+        } else {
+          setErrorMessage(data.message || "Erreur lors de l'envoi du message.");
+        }
       }
     } catch (error) {
+      // Handle network or unexpected errors
       setStatus("error");
+      setErrorMessage("Erreur réseau. Veuillez réessayer plus tard.");
       console.error("Erreur lors de l'envoi :", error);
     }
   };
@@ -83,10 +94,10 @@ const ContactUs = () => {
 
       {/* Section formulaire et carte Google (côte à côte) */}
       <div className="flex flex-col lg:flex-row gap-6 w-full px-3 md:px-4 lg:px-8">
-  {/* Section formulaire (à gauche) */}
-  <div className="bg-white p-8 rounded-lg shadow-[0_4px_6px_-1px_rgba(34,139,34,0.6)] w-full lg:w-1/2">
-    <h2 className="text-2xl font-bold text-darkGreen mb-4 text-center">Contactez-nous</h2>
-    <form onSubmit={handleSubmit}>
+        {/* Section formulaire (à gauche) */}
+        <div className="bg-white p-8 rounded-lg shadow-[0_4px_6px_-1px_rgba(34,139,34,0.6)] w-full lg:w-1/2">
+          <h2 className="text-2xl font-bold text-darkGreen mb-4 text-center">Contactez-nous</h2>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               name="nom"
@@ -116,54 +127,52 @@ const ContactUs = () => {
             <button
               type="submit"
               className="bg-darkGreen text-white px-4 py-2 rounded hover:bg-green-700 w-full"
+              disabled={status === "loading"}
             >
-              ENVOYER
+              {status === "loading" ? "Envoi en cours..." : "ENVOYER"}
             </button>
           </form>
-          {status === "loading" && <p className="text-blue-500">Envoi en cours...</p>}
-          {status === "success" && <p className="text-green-500">Message envoyé avec succès !</p>}
-          {status === "error" && <p className="text-red-500">Erreur lors de l'envoi.</p>}
+          {status === "success" && <p className="text-green-500 mt-3">Message envoyé avec succès !</p>}
+          {status === "error" && <p className="text-red-500 mt-3">{errorMessage}</p>}
         </div>
 
-  {/* Section carte Google (à droite) */}
-  <div className="w-full lg:w-1/2">
-    <h3 className="text-lg font-bold text-center mb-4">Trouvez-nous sur la carte</h3>
-    <div className="w-full h-auto rounded-lg overflow-hidden shadow-[0_4px_6px_-1px_rgba(34,139,34,0.6)]">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10001.8654484972083!2d10.0534!3d5.444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10f4445c5b2b7e5%3A0x316ad7db229540ff!2sUniversit%C3%A9+de+Dschang%2C+Cameroon!5e0!3m2!1sen!2sus!4v1678145170421!5m2!1sen!2sus"
-        width="100%"
-        height="100%"
-        style={{ border: 0, minHeight: "320px" }}
-        allowFullScreen=""
-        loading="lazy"
-      ></iframe>
-    </div>
-  </div>
-</div>
-
-
+        {/* Section carte Google (à droite) */}
+        <div className="w-full lg:w-1/2">
+          <h3 className="text-lg font-bold text-center mb-4">Trouvez-nous sur la carte</h3>
+          <div className="w-full h-auto rounded-lg overflow-hidden shadow-[0_4px_6px_-1px_rgba(34,139,34,0.6)]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10001.8654484972083!2d10.0534!3d5.444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10f4445c5b2b7e5%3A0x316ad7db229540ff!2sUniversit%C3%A9+de+Dschang%2C+Cameroon!5e0!3m2!1sen!2sus!4v1678145170421!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style={{ border: 0, minHeight: "320px" }}
+              allowFullScreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
 
       {/* Section des réseaux sociaux */}
       <div className="mt-10 text-center text-dark">
         <h3 className="text-lg font-bold mb-4">Suivez-nous sur</h3>
         <div className="flex justify-center space-x-6 text-2xl">
-          <a  target="_blank" rel="noopener noreferrer">
+          <a href="#" target="_blank" rel="noopener noreferrer">
             <FaFacebook className="hover:text-blue-500" />
           </a>
-          <a target="_blank" rel="noopener noreferrer">
+          <a href="#" target="_blank" rel="noopener noreferrer">
             <FaTwitter className="hover:text-blue-400" />
           </a>
-          <a  target="_blank" rel="noopener noreferrer">
+          <a href="#" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="hover:text-pink-400" />
           </a>
-          <a target="_blank" rel="noopener noreferrer">
+          <a href="#" target="_blank" rel="noopener noreferrer">
             <FaLinkedin className="hover:text-blue-700" />
           </a>
         </div>
       </div>
       <div className='pt-10 '>
         <Footer />
-        </div>
+      </div>
     </div>
   );
 };

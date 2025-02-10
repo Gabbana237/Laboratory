@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Beaker, Users, Clock, ChevronRight, Search, Tag, ExternalLink, Globe, Microscope, Atom } from "lucide-react";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import absorpImage from  '../images/chimieabsop.jpg';
+
 const ProjectCard = ({ title, status, domain, team, duration, image, description, keywords, partners, publications }) => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+ <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <div className="relative h-48 sm:h-56">
+      
       <img 
-        src={image} 
+        src= {`http://127.0.0.1:8000/storage/${image}`} 
         alt={title}
         className="w-full h-full object-cover"
       />
@@ -40,7 +41,7 @@ const ProjectCard = ({ title, status, domain, team, duration, image, description
       <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-3">{description}</p>
       
       <div className="flex flex-wrap gap-2 mb-4">
-        {keywords.map((keyword, index) => (
+        {keywords.split(", ").map((keyword, index) => (
           <span 
             key={index}
             className="flex items-center bg-teal-50 text-teal-600 px-2 py-1 rounded-full text-xs sm:text-sm"
@@ -55,7 +56,7 @@ const ProjectCard = ({ title, status, domain, team, duration, image, description
         <div className="mb-4">
           <h4 className="text-sm font-semibold text-gray-700 mb-2">Partenaires :</h4>
           <div className="flex flex-wrap gap-2">
-            {partners.map((partner, index) => (
+            {partners.split(", ").map((partner, index) => (
               <span key={index} className="flex items-center text-xs bg-gray-100 px-2 py-1 rounded">
                 <Globe className="w-3 h-3 mr-1" />
                 {partner}
@@ -82,68 +83,60 @@ const Projects = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [domainFilter, setDomainFilter] = useState("");
+  const [projects, setProjects] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const projects = [
-    {
-      title: "Développement de nouveaux catalyseurs pour la synthèse asymétrique",
-      status: "En cours",
-      domain: "Chimie organique",
-      team: 8,
-      duration: "2023-2026",
-      image: absorpImage,
-      description: "Recherche sur des catalyseurs innovants permettant une meilleure sélectivité dans les réactions de synthèse asymétrique.",
-      keywords: ["Catalyse asymétrique", "Chimie verte", "Synthèse organique"],
-      publications: "#"
-    },
-    {
-      title: "Étude des mécanismes de dégradation des polymères biodégradables",
-      status: "En cours",
-      domain: "Chimie computationnelle",
-      team: 5,
-      duration: "2024-2025",
-      image: absorpImage,
-      description: "Analyse approfondie des mécanismes de dégradation des polymères biodégradables en conditions environnementales.",
-      keywords: ["Polymères", "Environnement", "Analyse structurale"],
-      
-      publications: "#"
-    },
-    {
-      title: "Nouveaux matériaux pour le stockage d'hydrogène",
-      status: "Terminé",
-      domain: "Chimie des Matériaux",
-      team: 6,
-      duration: "2022-2024",
-      image: absorpImage,
-      description: "Développement de matériaux nanoporeux innovants pour le stockage efficace de l'hydrogène.",
-      keywords: ["Hydrogène", "Matériaux", "Énergie propre"],
-      
-      publications: "#"
-    },
-    {
-      title: "Synthèse de molécules bioactives pour applications pharmaceutiques",
-      status: "En préparation",
-      domain: "Chimie de l'absorption",
-      team: 4,
-      duration: "2025-2027",
-      image:absorpImage,
-      description: "Projet de synthèse de nouvelles molécules bioactives ciblant des pathologies spécifiques.",
-      keywords: ["Pharmacologie", "Synthèse", "Molécules bioactives"],
-      
-      publications: "#"
-    }
-  ];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/projects");
+       
 
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.keywords.some(keyword => keyword.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesStatus = !statusFilter || project.status === statusFilter;
-    const matchesDomain = !domainFilter || project.domain === domainFilter;
-    return matchesSearch && matchesStatus && matchesDomain;
-  });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const result = await response.json();
+
+        // Check if the response has a `data` field and it's an array
+        if (result.success && Array.isArray(result.data)) {
+          setProjects(result.data); // Set the `data` array to the state
+        } else {
+          throw new Error("Expected an array of projects in the 'data' field, but received: " + JSON.stringify(result));
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const filteredProjects = Array.isArray(projects)
+    ? projects.filter(project => {
+        const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              project.keywords.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesStatus = !statusFilter || project.status === statusFilter;
+        const matchesDomain = !domainFilter || project.domain === domainFilter;
+        return matchesSearch && matchesStatus && matchesDomain;
+      })
+    : [];
 
   const domains = [...new Set(projects.map(project => project.domain))];
   const statuses = [...new Set(projects.map(project => project.status))];
+
+  if (loading) {
+    return <div className="text-center py-12">Chargement en cours...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-12 text-red-500">Erreur: {error}</div>;
+  }
+  console.log(projects);
+
 
   return (
     <div className="min-h-screen bg-gray-50">
