@@ -66,7 +66,7 @@ const Header = () => {
           </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-6">
+        <nav className="hidden lg:flex space-x-6">
           {navItems.map((item, index) => (
             <div
               key={index}
@@ -120,7 +120,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden text-darkGreen p-2"
+          className="lg:hidden text-darkGreen p-2"
         >
           {isMenuOpen ? <X /> : <Menu />}
         </button>

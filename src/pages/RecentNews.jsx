@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Importez useEffect ici
 import {
   Calendar,
   Award,
@@ -9,45 +9,60 @@ import {
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import absorpImage from "../images/chimieabsop.jpg";
 
-// Composant NewsCard (inchangé)
-const NewsCard = ({ title, date, category, image, summary, tags }) => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-[1.02]">
-    <div className="relative h-48 sm:h-56">
-      <img
-        src={`http://127.0.0.1:8000/storage/${image}`}
-        alt={title}
-        className="w-full h-full object-cover"
-      />
-      <span className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-darkGreen text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
-        {category || "Non spécifiée"}
-      </span>
-    </div>
-    <div className="p-4 sm:p-6">
-      <div className="flex items-center text-gray-500 text-xs sm:text-sm mb-2 sm:mb-3">
-        <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-        {date || "Date non spécifiée"}
+// Composant NewsCard avec gestion de la description tronquée
+const NewsCard = ({ title, date, category, image, description, tags }) => {
+  const [showFullDescription, setShowFullDescription] = useState(false); // État pour gérer l'affichage complet
+
+  // Limiter la description à 150 caractères
+  const truncatedDescription = description?.length > 150 ? description.slice(0, 150) + "..." : description;
+
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-[1.02]">
+      <div className="relative h-48 sm:h-56">
+        <img
+          src={`http://127.0.0.1:8000/storage/${image}`}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+        <span className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-darkGreen text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
+          {category || "Non spécifiée"}
+        </span>
       </div>
-      <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-800 line-clamp-2">
-        {title || "Titre non spécifié"}
-      </h3>
-      <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-3">
-        {summary || "Résumé non spécifié"}
-      </p>
-      <div className="flex flex-wrap gap-1 sm:gap-2">
-        {tags?.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-gray-100 text-gray-600 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm"
+      <div className="p-4 sm:p-6">
+        <div className="flex items-center text-gray-500 text-xs sm:text-sm mb-2 sm:mb-3">
+          <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+          {date ? new Date(date).toLocaleDateString() : "Date non spécifiée"}
+        </div>
+        <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-800 line-clamp-2">
+          {title || "Titre non spécifié"}
+        </h3>
+        <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-3">
+          {showFullDescription ? description : truncatedDescription}
+        </p>
+        {/* Bouton "Voir plus" ou "Voir moins" */}
+        {description?.length > 150 && (
+          <button
+            onClick={() => setShowFullDescription(!showFullDescription)}
+            className="text-darkGreen text-sm mb-8 font-medium hover:underline focus:outline-none"
           >
-            {tag}
-          </span>
-        ))}
+            {showFullDescription ? "Voir moins" : "Voir plus"}
+          </button>
+        )}
+        <div className="flex flex-wrap gap-1 sm:gap-2">
+          {tags?.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-gray-100 text-gray-600 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const RecentNews = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -62,7 +77,7 @@ const RecentNews = () => {
     { icon: Award, value: "3", label: "Prix reçus" },
   ];
 
-  const filters = ["all", "recherche", "conference", "collaboration", "événement"];
+  const filters = ["all", "recherche", "conference", "collaboration", "venement"];
 
   // Récupération des données depuis l'API au montage du composant
   useEffect(() => {
@@ -90,7 +105,7 @@ const RecentNews = () => {
       activeFilter === "all" || item.type.toLowerCase() === activeFilter.toLowerCase(); // Filtrer par 'type'
     const matchesSearch =
       item.title?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
-      item.summary?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
+      item.description?.toLowerCase()?.includes(searchQuery.toLowerCase()) || // Utilisez description ici
       (item.tags || []).some((tag) =>
         tag.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -182,15 +197,21 @@ const RecentNews = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 my-6 sm:my-8">
             {filteredNews.length > 0 ? (
               filteredNews.map((item, index) => (
-                <NewsCard key={index} {...item} />
+                <NewsCard
+                  key={index}
+                  title={item.title}
+                  date={item.date}
+                  category={item.category}
+                  image={item.image}
+                  description={item.description} // Utilisez description ici
+                  tags={item.tags}
+                />
               ))
             ) : (
               <p className="col-span-full text-center text-gray-500">Aucune actualité ne correspond à votre recherche.</p>
             )}
           </div>
         )}
-
-       
       </div>
 
       {/* Footer */}
