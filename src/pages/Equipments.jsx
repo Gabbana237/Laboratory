@@ -3,15 +3,20 @@ import Header from "../components/Header";
 
 const Equipments = () => {
     const [equipments, setEquipments] = useState([]);
-    const [selectedImage, setSelectedImage] = useState(null); // État pour l'image sélectionnée
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(true); // État du chargement
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/equipments")
             .then((response) => response.json())
-            .then((data) => setEquipments(data))
-            .catch((error) =>
-                console.error("Erreur lors du chargement des équipements :", error)
-            );
+            .then((data) => {
+                setEquipments(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Erreur lors du chargement des équipements :", error);
+                setLoading(false);
+            });
     }, []);
 
     return (
@@ -28,22 +33,29 @@ const Equipments = () => {
                 </div>
             </div>
 
-            {/* Affichage des équipements */}
             <div className="container mx-auto px-4 py-12">
                 <h2 className="text-3xl font-bold text-darkGreen mb-5">Équipements</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-                    {equipments.map((equipment, index) => (
-                        <div key={index} className="text-center">
-                            <img
-                                src={equipment.image_url}
-                                alt={equipment.name}
-                                className="w-full sm:w-52 h-52 object-cover rounded-lg shadow-lg mx-auto cursor-pointer hover:scale-105 transition-transform duration-300"
-                                onClick={() => setSelectedImage(equipment.image_url)} // Ouvre la modale
-                            />
-                            <p className="mt-2 text-lg font-semibold">{equipment.name}</p>
-                        </div>
-                    ))}
-                </div>
+
+                {/* Affichage du loader si les données sont en cours de chargement */}
+                {loading ? (
+                    <div className="text-center text-darkGreen font-semibold text-lg">
+                        Chargement des équipements...
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+                        {equipments.map((equipment, index) => (
+                            <div key={index} className="text-center">
+                                <img
+                                    src={equipment.image_url}
+                                    alt={equipment.name}
+                                    className="w-full sm:w-52 h-52 object-cover rounded-lg shadow-lg mx-auto cursor-pointer hover:scale-105 transition-transform duration-300"
+                                    onClick={() => setSelectedImage(equipment.image_url)}
+                                />
+                                <p className="mt-2 text-lg font-semibold">{equipment.name}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* Modale pour afficher l'image en plein écran */}
@@ -57,7 +69,7 @@ const Equipments = () => {
                         />
                         <button
                             className="absolute top-4 right-4 bg-white text-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-200 transition duration-300"
-                            onClick={() => setSelectedImage(null)} // Ferme la modale
+                            onClick={() => setSelectedImage(null)}
                         >
                             ✕
                         </button>

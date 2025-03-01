@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag } from "lucide-react";
+import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag,Loader2  } from "lucide-react";
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -95,13 +95,17 @@ const EventFilter = ({ icon: Icon, label, options, value, onChange }) => (
 const UpcomingEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
+  const [loading, setLoading] = useState(true);
   const [monthFilter, setMonthFilter] = useState("");
   const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null);
   const [page, setPage] = useState(1); // État pour la pagination
   const [hasMore, setHasMore] = useState(true); // État pour vérifier s'il y a plus d'événements à charger
 
   const fetchEvents = async (page) => {
+    setLoading(true);
     try {
+      
       const response = await fetch(`http://127.0.0.1:8000/api/evement-avenir?page=${page}`);
       const data = await response.json();
       if (data.data.length > 0) {
@@ -115,7 +119,9 @@ const UpcomingEvents = () => {
       }
     } catch (error) {
       console.error('Error fetching events:', error);
+      setError("Erreur lors du chargement des événements");
     }
+    setLoading(false);
   };
   
 
@@ -170,7 +176,7 @@ const UpcomingEvents = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-
+           
           <div className="relative">
             <EventFilter
               icon={Tag}
@@ -206,8 +212,10 @@ const UpcomingEvents = () => {
             <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           </div>
         </div>
-
+            
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        {error && <p className="text-red-500">{error}</p>}
+        {loading && <Loader2 className="animate-spin mx-auto my-4" />}
           {filteredEvents.map((event, index) => (
             <EventCard 
               key={index}
