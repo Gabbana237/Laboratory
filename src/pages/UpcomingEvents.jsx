@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag } from "lucide-react";
-
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import absorpImage from '../images/chimieabsop.jpg';
 
-// Composant EventCard (inchangé)
+// Composant EventCard
 const EventCard = ({ title, date, time, location, type, capacity, image, description, tags, registrationLink }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const truncatedDescription = description.length > 120 ? description.slice(0, 120) + "..." : description;
@@ -15,7 +14,7 @@ const EventCard = ({ title, date, time, location, type, capacity, image, descrip
       <div className="relative h-48 sm:h-56">
         <img 
           src={image} 
-          alt={title}
+          alt={title} // Balise alt descriptive
           className="w-full h-full object-cover"
         />
         <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex gap-2">
@@ -72,7 +71,7 @@ const EventCard = ({ title, date, time, location, type, capacity, image, descrip
   );
 };
 
-// Composant EventFilter (inchangé)
+// Composant EventFilter
 const EventFilter = ({ icon: Icon, label, options, value, onChange }) => (
   <div className="relative">
     <select
@@ -117,7 +116,6 @@ const UpcomingEvents = () => {
       console.error('Error fetching events:', error);
     }
   };
-  
 
   // Charger les événements initiaux
   useEffect(() => {
@@ -148,7 +146,20 @@ const UpcomingEvents = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header/>
+      {/* Balises SEO */}
+      <title>Événements à venir | Laboratoire de Chimie URCHINGE</title>
+      <meta
+        name="description"
+        content="Découvrez les prochains événements scientifiques du laboratoire de chimie URCHINGE. Conférences, ateliers et publications à ne pas manquer."
+      />
+      <meta
+        name="keywords"
+        content="événements scientifiques, conférences, ateliers, laboratoire de chimie, URCHINGE"
+      />
+      <meta name="author" content="Laboratoire de Chimie URCHINGE" />
+      <meta name="robots" content="index, follow" />
+
+      <Header />
       <div className="bg-gradient-to-r from-darkGreen pt-24 text-dark py-8 sm:py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-xl md:text-2xl lg:text-4xl mt-8 font-bold mb-4">Événements à venir</h1>
@@ -243,7 +254,7 @@ const UpcomingEvents = () => {
           </div>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

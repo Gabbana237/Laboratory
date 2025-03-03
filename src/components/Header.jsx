@@ -23,19 +23,19 @@ const Header = () => {
     },
     {
       label: "Recherches",
-      href: "/projects",
+      href: "/projects-de-recherche",
     },
     {
       label: "Actualités",
       
       subItems: [
-        { label: "Nouvelles récentes", href: "/recent-news" },
-        { label: "Événements à venir", href: "/upcoming-events" },
+        { label: "Nouvelles récentes", href: "/actualite-recente" },
+        { label: "Événements à venir", href: "/actualite-a-venir" },
       ],
     },
     {
       label: "Équipe",
-      href: "/team",
+      href: "/equipe",
     },
     {
       label: "Équipement",
@@ -43,7 +43,7 @@ const Header = () => {
     },
     {
       label: "À propos",
-      href: "/about",
+      href: "/a-propos",
     },
     {
       label: "Contact",

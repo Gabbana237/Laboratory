@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Importez useEffect ici
+import React, { useState, useEffect } from "react";
 import {
   Calendar,
   Award,
@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 
 // Composant NewsCard avec gestion de la description tronquée
 const NewsCard = ({ title, date, category, image, description, tags }) => {
-  const [showFullDescription, setShowFullDescription] = useState(false); // État pour gérer l'affichage complet
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   // Limiter la description à 150 caractères
   const truncatedDescription = description?.length > 150 ? description.slice(0, 150) + "..." : description;
@@ -22,7 +22,7 @@ const NewsCard = ({ title, date, category, image, description, tags }) => {
       <div className="relative h-48 sm:h-56">
         <img
           src={`http://127.0.0.1:8000/storage/${image}`}
-          alt={title}
+          alt={title} // Balise alt descriptive
           className="w-full h-full object-cover"
         />
         <span className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-darkGreen text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
@@ -114,6 +114,19 @@ const RecentNews = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Balises SEO */}
+      <title>Actualités du Laboratoire | Laboratoire de Chimie URCHINGE</title>
+      <meta
+        name="description"
+        content="Découvrez les dernières actualités du laboratoire de chimie URCHINGE. Restez informé sur nos recherches, publications et événements scientifiques."
+      />
+      <meta
+        name="keywords"
+        content="actualités, laboratoire de chimie, URCHINGE, recherche scientifique, publications, événements scientifiques"
+      />
+      <meta name="author" content="Laboratoire de Chimie URCHINGE" />
+      <meta name="robots" content="index, follow" />
+
       {/* Header */}
       <Header />
 
