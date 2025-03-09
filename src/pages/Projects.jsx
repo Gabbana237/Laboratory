@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Beaker, Users, Clock, Search, Globe } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LoadingSpinner from "../components/LoadingSpinner"; // Importez votre composant de chargement
 
 // Fonction pour tronquer la description
 const truncatedDescription = (desc) => {
@@ -192,9 +193,7 @@ const Projects = () => {
   const statuses = [...new Set(projects.map((p) => p.status))];
   const domains = [...new Set(projects.map((p) => p.domain))];
 
-  if (loading) {
-    return <div className="text-center py-12">Chargement en cours...</div>;
-  }
+ 
   if (error) {
     return (
       <div className="text-center py-12 text-red-500">Erreur: {error}</div>
@@ -228,7 +227,11 @@ const Projects = () => {
           </div>
         </div>
       </div>
-
+      {loading && (
+            <div className="flex justify-center items-center min-h-[50vh]">
+              <LoadingSpinner />
+            </div>
+          )}
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="relative">

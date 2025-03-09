@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag } from "lucide-react";
+import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag, Loader2 } from "lucide-react";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import absorpImage from '../images/chimieabsop.jpg';
+import LoadingSpinner from "../components/LoadingSpinner";
 
 // Composant EventCard
 const EventCard = ({ title, date, time, location, type, capacity, image, description, tags, registrationLink }) => {
@@ -14,7 +15,7 @@ const EventCard = ({ title, date, time, location, type, capacity, image, descrip
       <div className="relative h-48 sm:h-56">
         <img 
           src={image} 
-          alt={title} // Balise alt descriptive
+          alt={title}
           className="w-full h-full object-cover"
         />
         <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex gap-2">
@@ -94,48 +95,49 @@ const EventFilter = ({ icon: Icon, label, options, value, onChange }) => (
 const UpcomingEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
+  const [loading, setLoading] = useState(true);
   const [monthFilter, setMonthFilter] = useState("");
   const [events, setEvents] = useState([]);
-  const [page, setPage] = useState(1); // État pour la pagination
-  const [hasMore, setHasMore] = useState(true); // État pour vérifier s'il y a plus d'événements à charger
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchEvents = async (page) => {
+    setLoading(true);
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/evement-avenir?page=${page}`);
       const data = await response.json();
       if (data.data.length > 0) {
         setEvents((prevEvents) => {
-          const existingIds = new Set(prevEvents.map(event => event.id)); // Stocker les IDs existants
-          const newEvents = data.data.filter(event => !existingIds.has(event.id)); // Filtrer les doublons
-          return [...prevEvents, ...newEvents]; // Ajouter uniquement les nouveaux événements
+          const existingIds = new Set(prevEvents.map(event => event.id));
+          const newEvents = data.data.filter(event => !existingIds.has(event.id));
+          return [...prevEvents, ...newEvents];
         });
       } else {
         setHasMore(false);
       }
     } catch (error) {
       console.error('Error fetching events:', error);
+      setError("Erreur lors du chargement des événements");
     }
+    setLoading(false);
   };
 
-  // Charger les événements initiaux
   useEffect(() => {
     fetchEvents(page);
   }, []);
 
-  // Fonction pour charger plus d'événements
   const loadMoreEvents = () => {
     const nextPage = page + 1;
     setPage(nextPage);
     fetchEvents(nextPage);
   };
 
-  // Fonction pour extraire le mois d'une date au format YYYY-MM-DD
   const getMonthFromDate = (dateString) => {
     const month = dateString.split('-')[1];
     return parseInt(month, 10);
   };
 
-  // Filtrer les événements
   const filteredEvents = events.filter(event => {
     const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = !typeFilter || event.type === typeFilter;
@@ -168,7 +170,11 @@ const UpcomingEvents = () => {
           </p>
         </div>
       </div>
-
+      {loading && (
+            <div className="flex justify-center items-center min-h-[50vh]">
+              <LoadingSpinner />
+            </div>
+          )}
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="relative">
@@ -181,7 +187,7 @@ const UpcomingEvents = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-
+           
           <div className="relative">
             <EventFilter
               icon={Tag}
@@ -217,8 +223,10 @@ const UpcomingEvents = () => {
             <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           </div>
         </div>
-
+            
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          {error && <p className="text-red-500">{error}</p>}
+        
           {filteredEvents.map((event, index) => (
             <EventCard 
               key={index}
@@ -236,7 +244,7 @@ const UpcomingEvents = () => {
           ))}
         </div>
 
-        {filteredEvents.length === 0 && (
+        {filteredEvents.length === 0 && !loading && (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">Aucun événement ne correspond à vos critères de recherche</p>
           </div>
