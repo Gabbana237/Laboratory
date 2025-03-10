@@ -28,7 +28,7 @@ const Home = () => {
                 <LabOverview />
             </div>
             <section>
-                <div className='mt-12 pb-10 flex items-center sm:mt-auto'>
+                <div className='mt-12 pb-10 sm:mt-auto'>
                     <ResearchDomains />
                 </div>
             </section>

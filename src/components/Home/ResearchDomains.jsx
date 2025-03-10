@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
 
 const ResearchDomains = () => {
   const [domains, setDomains] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Ajout d'un état de chargement
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/research-domains")
       .then(response => response.json())
-      .then(data => setDomains(data))
-      .catch(error => console.error("Erreur de chargement :", error));
+      .then(data => {
+        setDomains(data);
+        setIsLoading(false); // Désactiver le chargement une fois les données chargées
+      })
+      .catch(error => {
+        console.error("Erreur de chargement :", error);
+        setIsLoading(false); // Désactiver le chargement en cas d'erreur
+      });
   }, []);
 
   return (
@@ -22,9 +30,16 @@ const ResearchDomains = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-        {domains.length > 0 ? (
-          domains.map((domain, index) => (
+      {/* Conteneur principal pour la grille ou le spinner */}
+      {isLoading ? (
+        // Conteneur pour le spinner (en dehors de la grille)
+        <div className="flex justify-center items-center min-h-[50vh] w-full">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        // Grille pour afficher les domaines de recherche
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+          {domains.map((domain, index) => (
             <div
               key={index}
               className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300"
@@ -51,11 +66,9 @@ const ResearchDomains = () => {
                 </div>
               </div>
             </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-600">Chargement des données...</p>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

@@ -170,11 +170,7 @@ const UpcomingEvents = () => {
           </p>
         </div>
       </div>
-      {loading && (
-            <div className="flex justify-center items-center min-h-[50vh]">
-              <LoadingSpinner />
-            </div>
-          )}
+
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="relative">
@@ -243,7 +239,11 @@ const UpcomingEvents = () => {
             />
           ))}
         </div>
-
+        {loading && (
+            <div className="flex justify-center items-center">
+              <LoadingSpinner />
+            </div>
+          )}
         {filteredEvents.length === 0 && !loading && (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">Aucun événement ne correspond à vos critères de recherche</p>
