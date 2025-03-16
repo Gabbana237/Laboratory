@@ -61,6 +61,7 @@ const Equipments = () => {
             {loading && (
             <div className="flex justify-center items-center">
               <LoadingSpinner />
+              
             </div>
           )}
 
