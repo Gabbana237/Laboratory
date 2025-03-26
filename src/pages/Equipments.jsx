@@ -58,16 +58,15 @@ const Equipments = () => {
                     </p>
                 </div>
             </div>
-            {loading && (
+            
+            <div className="container mx-auto px-4 py-12">
+                <h2 className="text-3xl font-bold text-darkGreen mb-5">Équipements</h2>
+                {loading && (
             <div className="flex justify-center items-center">
               <LoadingSpinner />
               
             </div>
           )}
-
-            <div className="container mx-auto px-4 py-12">
-                <h2 className="text-3xl font-bold text-darkGreen mb-5">Équipements</h2>
-
                 {/* Affichage du loader si les données sont en cours de chargement */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
                         {equipments.map((equipment, index) => (
