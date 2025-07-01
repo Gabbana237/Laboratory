@@ -14,9 +14,9 @@ const Footer = () => {
               <img src="/images/logoSite.png" alt="Logo du site" className="h-16 w-16 object-contain" />
                 <h3 className="text-lg font-bold">URCHINCHE</h3>
               </a>
-              <p><i class="fas fa-map-marker-alt"></i>  Porte <span className="font-bold text-darkGreen">417</span> du decanat de la faculte des sciences</p>
-              <p><i class="fa fa-envelope"></i>   <a href="mailto:contact@laboratoire-chimir.com" className="underline decoration-darkGreen">contact@laboratoire-chimir.com</a></p>
-              <p><i className="fa-phone fa "></i>  +237 6 86 36 23 76</p>
+              <p><i class="fas fa-map-marker-alt"></i> Campus C  Porte <span className="font-bold text-darkGreen">417</span> Faculté des Sciences, Département de Chimie</p>
+              <p><i class="fa fa-envelope"></i>   <a href="mailto: ignas.tonle@univ-dschang.org" className="underline decoration-darkGreen">ignas.tonle@univ-dschang.org</a></p>
+              <p><i className="fa-phone fa "></i> Tel : 696 141 545</p>
             </div>
 
             {/* Section Liens rapides */}

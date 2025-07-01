@@ -68,53 +68,33 @@ const AboutPage = () => {
                 alt="Image du laboratoire"
                 className="rounded-lg shadow-lg w-full md:w-1/2"
               />
-              <div className="text-lg md:w-1/2 leading-relaxed">
-                <p>
-                  Fondé en <strong>1995</strong>, notre laboratoire a commencé
-                  avec une mission simple : explorer les frontières de la
-                  chimie moderne tout en contribuant au progrès scientifique.
-                </p>
-                <p className="mt-3">
-                  Au fil des années, nous avons élargi nos domaines de recherche
-                  pour inclure des secteurs innovants tels que la chimie verte,
-                  l'analyse pharmaceutique et les nanotechnologies. Nos travaux
-                  ont été reconnus par plusieurs prix internationaux.
-                </p>
-                <p className="mt-3">
-                  Au fil des années, nous avons élargi nos domaines de recherche
-                  pour inclure des secteurs innovants tels que la chimie verte,
-                  l'analyse pharmaceutique et les nanotechnologies. Nos travaux
-                  ont été reconnus par plusieurs prix internationaux.
-                </p>
-                <p className="mt-3">
-                  Au fil des années, nous avons élargi nos domaines de recherche
-                  pour inclure des secteurs innovants tels que la chimie verte,
-                  l'analyse pharmaceutique et les nanotechnologies. Nos travaux
-                  ont été reconnus par plusieurs prix internationaux.
-                </p>
-                <p className="mt-3">
-                  Au fil des années, nous avons élargi nos domaines de recherche
-                  pour inclure des secteurs innovants tels que la chimie verte,
-                  l'analyse pharmaceutique et les nanotechnologies. Nos travaux
-                  ont été reconnus par plusieurs prix internationaux.
-                </p>
-              </div>
+             <div className="text-lg md:w-1/2 leading-relaxed">
+  <p>
+    Créé en <strong>2005</strong>, le laboratoire a d’abord porté le nom de <strong>Laboratoire de Chimie des Nuisances et de Génie de l’Environnement (LACHINGE)</strong>. Il avait pour objectif initial de contribuer à l’étude et à la gestion des nuisances chimiques dans les milieux naturels, en particulier les milieux aqueux.
+  </p>
+  <p className="mt-3">
+    Face à l’évolution des enjeux environnementaux et à l’enrichissement de ses axes de recherche, le laboratoire a connu une transformation structurelle et scientifique majeure en <strong>2017</strong>, devenant officiellement l’<strong>Unité de Recherche de Chimie des Nuisances et de Génie de l’Environnement (URCHINGE)</strong>.
+  </p>
+  <p className="mt-3">
+    Depuis sa création, l'<strong>URCHINGE</strong> s'impose comme un pôle de recherche dynamique au sein de la <strong>Faculté des Sciences de l’Université de Dschang</strong>, combinant innovation, rigueur scientifique et engagement pour la protection de l’environnement.
+  </p>
+</div>
+
             </div>
           </div>
         )}
 
         {activeTab === "values" && (
           <div>
-            <h2 className="text-3xl font-bold text-darkGreen mb-5">Nos valeurs</h2>
-            <ul className="list-disc pl-5 text-lg leading-relaxed">
-              <li>Recherche d'excellence et rigueur scientifique.</li>
-              <li>
-                Respect des normes environnementales dans toutes nos pratiques.
-              </li>
-              <li>
-                Innovation continue pour répondre aux défis de demain.
-              </li>
-            </ul>
+          <h2 className="text-3xl font-bold text-darkGreen mb-5">Nos valeurs</h2>
+<ul className="list-disc pl-5 text-lg leading-relaxed">
+  <li>Excellence scientifique dans la recherche fondamentale et appliquée en chimie et génie de l’environnement.</li>
+  <li>Engagement pour la protection de l’environnement et la gestion durable des ressources naturelles.</li>
+  <li>Innovation constante dans la conception de capteurs, le traitement des eaux et la chimie verte.</li>
+  <li>Collaboration interdisciplinaire et ouverture aux partenariats nationaux et internationaux.</li>
+  <li>Transfert de savoirs et formation de qualité pour les étudiants et jeunes chercheurs.</li>
+</ul>
+
           </div>
         )}
       </div>
