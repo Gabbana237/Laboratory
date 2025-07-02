@@ -57,6 +57,19 @@ const ContactUs = () => {
 
   return (
     <div className="bg-lightGray flex flex-col">
+      {/* Balises SEO */}
+      <title>Contactez-nous | Laboratoire de Chimie URCHINGE</title>
+      <meta
+        name="description"
+        content="Contactez le laboratoire de chimie URCHINGE pour toute question ou demande d'information. Nous sommes situés à l'Université de Dschang, Cameroun."
+      />
+      <meta
+        name="keywords"
+        content="contact, laboratoire de chimie, URCHINGE, Université de Dschang, Cameroun, formulaire de contact"
+      />
+      <meta name="author" content="Laboratoire de Chimie URCHINGE" />
+      <meta name="robots" content="index, follow" />
+
       <Header />
 
       {/* Section des cartes (en haut) */}
@@ -147,6 +160,7 @@ const ContactUs = () => {
               style={{ border: 0, minHeight: "320px" }}
               allowFullScreen=""
               loading="lazy"
+              title="Carte Google de l'Université de Dschang"
             ></iframe>
           </div>
         </div>

@@ -10,7 +10,7 @@ const LabOverview = () => {
           Bienvenue au Laboratoire de Chimie
         </h2>
         <p className="mt-4 text-lg text-gray-600">
-        Explorez notre laboratoire de chimie, un lieu d'échange et de collaboration au service de la science.
+          Explorez notre laboratoire de chimie, un lieu d'échange et de collaboration au service de la science.
         </p>
       </div>
 
@@ -19,21 +19,23 @@ const LabOverview = () => {
         {/* Objectives */}
         <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition">
           <div className="text-emerald-500 text-4xl mb-4">🔬</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">Notre Objectif</h3>
-          <p className="text-gray-600">
-            Contribuer à des avancées scientifiques significatives en chimie organique, analytique, et environnementale.
-          </p>
+          <h3 className="lg:text-2xl text-xl font-bold text-gray-800 mb-2">Missions de l’URCHINGE</h3>
+          <ul className="text-gray-600 list-disc list-inside space-y-1 text-left">
+            <li>Développer des capteurs de détection de divers polluants en milieux aqueux,</li>
+            <li>Analyser et traiter les eaux de consommation et usées,</li>
+            <li>Modéliser les molécules,</li>
+            <li>Synthétiser, analyser et explorer les applications des complexes de coordination</li>
+          </ul>
         </div>
 
         {/* History */}
         <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition">
-    <div className="text-sky-500 text-4xl mb-4">🏆</div>
-    <h3 className="text-2xl font-bold text-gray-800 mb-2">Nos Réalisations</h3>
-    <p className="text-gray-600">
-      Découvrez nos publications scientifiques, nos brevets déposés, et nos projets ayant un impact positif sur la société.
-    </p>
-</div>
-
+          <div className="text-sky-500 text-4xl mb-4">🏆</div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-2">Nos Réalisations</h3>
+          <p className="text-gray-600">
+            Découvrez nos publications scientifiques, nos brevets déposés, et nos projets ayant un impact positif sur la société.
+          </p>
+        </div>
 
         {/* Expertise */}
         <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition">

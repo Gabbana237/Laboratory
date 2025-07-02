@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag,Loader2  } from "lucide-react";
-
+import { Calendar, Clock, MapPin, ChevronDown, ChevronRight, Search, Tag, Loader2 } from "lucide-react";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import absorpImage from '../images/chimieabsop.jpg';
+import LoadingSpinner from "../components/LoadingSpinner";
 
-// Composant EventCard (inchangé)
+// Composant EventCard
 const EventCard = ({ title, date, time, location, type, capacity, image, description, tags, registrationLink }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const truncatedDescription = description.length > 120 ? description.slice(0, 120) + "..." : description;
@@ -72,7 +72,7 @@ const EventCard = ({ title, date, time, location, type, capacity, image, descrip
   );
 };
 
-// Composant EventFilter (inchangé)
+// Composant EventFilter
 const EventFilter = ({ icon: Icon, label, options, value, onChange }) => (
   <div className="relative">
     <select
@@ -99,20 +99,19 @@ const UpcomingEvents = () => {
   const [monthFilter, setMonthFilter] = useState("");
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1); // État pour la pagination
-  const [hasMore, setHasMore] = useState(true); // État pour vérifier s'il y a plus d'événements à charger
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchEvents = async (page) => {
     setLoading(true);
     try {
-      
       const response = await fetch(`http://127.0.0.1:8000/api/evement-avenir?page=${page}`);
       const data = await response.json();
       if (data.data.length > 0) {
         setEvents((prevEvents) => {
-          const existingIds = new Set(prevEvents.map(event => event.id)); // Stocker les IDs existants
-          const newEvents = data.data.filter(event => !existingIds.has(event.id)); // Filtrer les doublons
-          return [...prevEvents, ...newEvents]; // Ajouter uniquement les nouveaux événements
+          const existingIds = new Set(prevEvents.map(event => event.id));
+          const newEvents = data.data.filter(event => !existingIds.has(event.id));
+          return [...prevEvents, ...newEvents];
         });
       } else {
         setHasMore(false);
@@ -123,27 +122,22 @@ const UpcomingEvents = () => {
     }
     setLoading(false);
   };
-  
 
-  // Charger les événements initiaux
   useEffect(() => {
     fetchEvents(page);
   }, []);
 
-  // Fonction pour charger plus d'événements
   const loadMoreEvents = () => {
     const nextPage = page + 1;
     setPage(nextPage);
     fetchEvents(nextPage);
   };
 
-  // Fonction pour extraire le mois d'une date au format YYYY-MM-DD
   const getMonthFromDate = (dateString) => {
     const month = dateString.split('-')[1];
     return parseInt(month, 10);
   };
 
-  // Filtrer les événements
   const filteredEvents = events.filter(event => {
     const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = !typeFilter || event.type === typeFilter;
@@ -154,7 +148,20 @@ const UpcomingEvents = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header/>
+      {/* Balises SEO */}
+      <title>Événements à venir | Laboratoire de Chimie URCHINGE</title>
+      <meta
+        name="description"
+        content="Découvrez les prochains événements scientifiques du laboratoire de chimie URCHINGE. Conférences, ateliers et publications à ne pas manquer."
+      />
+      <meta
+        name="keywords"
+        content="événements scientifiques, conférences, ateliers, laboratoire de chimie, URCHINGE"
+      />
+      <meta name="author" content="Laboratoire de Chimie URCHINGE" />
+      <meta name="robots" content="index, follow" />
+
+      <Header />
       <div className="bg-gradient-to-r from-darkGreen pt-24 text-dark py-8 sm:py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-xl md:text-2xl lg:text-4xl mt-8 font-bold mb-4">Événements à venir</h1>
@@ -214,8 +221,8 @@ const UpcomingEvents = () => {
         </div>
             
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-        {error && <p className="text-red-500">{error}</p>}
-        {loading && <Loader2 className="animate-spin mx-auto my-4" />}
+          {error && <p className="text-red-500">{error}</p>}
+        
           {filteredEvents.map((event, index) => (
             <EventCard 
               key={index}
@@ -232,8 +239,12 @@ const UpcomingEvents = () => {
             />
           ))}
         </div>
-
-        {filteredEvents.length === 0 && (
+        {loading && (
+            <div className="flex justify-center items-center">
+              <LoadingSpinner />
+            </div>
+          )}
+        {filteredEvents.length === 0 && !loading && (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">Aucun événement ne correspond à vos critères de recherche</p>
           </div>
@@ -251,7 +262,7 @@ const UpcomingEvents = () => {
           </div>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

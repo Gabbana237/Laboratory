@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from '../components/Footer';
+
 const AboutPage = () => {
   const [activeTab, setActiveTab] = useState("history");
 
@@ -16,46 +17,54 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="bg-gray-50 font-sans text-gray-800">
-      {/* Header */}
-      <Header/>
-    <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
-      <div className="container mx-auto text-center relative z-10">
-          <h1 className="text-xl md:text-2xl lg:text-4xl font-bold pt-8 md:pt-12 lg:pt-16">
-            À propos de notre laboratoire
-          </h1>
-          <p className="mt-2 text-sm lg:text-lg">
-            Découvrez notre histoire, nos valeurs et notre équipement de pointe.
-          </p>
+    <>
+      {/* Balises de métadonnées */}
+      <title>À propos de notre laboratoire - Laboratoire de chimie URCHINGE de Dschang</title>
+      <meta name="description" content="Découvrez l'histoire, les valeurs et l'équipement de pointe de notre laboratoire. Fondé en 1995, nous sommes leaders en chimie moderne." />
+      <meta name="keywords" content="laboratoire, chimie moderne, recherche scientifique, équipement de pointe, innovation" />
+      <meta property="og:title" content="À propos de notre laboratoire - Laboratoire XYZ" />
+      <meta property="og:description" content="Découvrez l'histoire, les valeurs et l'équipement de pointe de notre laboratoire. Fondé en 1995, nous sommes leaders en chimie moderne." />
+      <meta property="og:image" content="/images/logoSite.png" />
+      <meta name="twitter:title" content="À propos de notre laboratoire - Laboratoire XYZ" />
+      <meta name="twitter:description" content="Découvrez l'histoire, les valeurs et l'équipement de pointe de notre laboratoire. Fondé en 1995, nous sommes leaders en chimie moderne." />
+      <meta name="twitter:image" content="/images/logoSite.png" />
+
+      {/* Contenu de la page */}
+      <div className="bg-gray-50 font-sans text-gray-800">
+        {/* Header */}
+        <Header />
+        <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
+          <div className="container mx-auto text-center relative z-10">
+            <h1 className="text-xl md:text-2xl lg:text-4xl font-bold pt-8 md:pt-12 lg:pt-16">
+              À propos de notre laboratoire
+            </h1>
+            <p className="mt-2 text-sm lg:text-lg">
+              Découvrez notre histoire, nos valeurs et notre équipement de pointe.
+            </p>
+          </div>
+        </header>
+
+        {/* Tabs Navigation */}
+        <div className="container mx-auto py-5">
+          <div className="flex justify-center space-x-5 border-b">
+            <button
+              className={`py-2 text-sm px-2 lg:px-4 ${
+                activeTab === "history" ? "border-b-4 border-darkGreen font-bold" : ""
+              }`}
+              onClick={() => setActiveTab("history")}
+            >
+              Historique
+            </button>
+            <button
+              className={`py-2 text-sm px-2 lg:px-4 ${
+                activeTab === "values" ? "border-b-4 border-darkGreen font-bold" : ""
+              }`}
+              onClick={() => setActiveTab("values")}
+            >
+              Valeurs
+            </button>
+          </div>
         </div>
-      </header>
-
-
-
-
-      {/* Tabs Navigation */}
-      <div className="container mx-auto py-5">
-        <div className="flex justify-center space-x-5 border-b">
-          <button
-            className={`py-2 text-sm px-2 lg:px-4 ${
-              activeTab === "history" ? "border-b-4 border-darkGreen font-bold" : ""
-            }`}
-            onClick={() => setActiveTab("history")}
-          >
-            Historique
-          </button>
-          <button
-            className={`py-2 text-sm px-2 lg:px-4 ${
-              activeTab === "values" ? "border-b-4 border-darkGreen font-bold" : ""
-            }`}
-            onClick={() => setActiveTab("values")}
-          >
-            Valeurs
-          </button>
-        </div>
-      
-        
-      </div>
 
       {/* Tab Content */}
       <div className="container mx-auto py-10 px-5">
@@ -101,7 +110,8 @@ const AboutPage = () => {
       <div className='pt-10 '>
         <Footer />
         </div>
-    </div>
+      </div>
+    </>
   );
 };
 

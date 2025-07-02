@@ -1,35 +1,22 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import {
-  Beaker,
-  Users,
-  Clock,
-  Search,
-  Globe,
-} from "lucide-react";
+import { Beaker, Users, Clock, Search, Globe } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LoadingSpinner from "../components/LoadingSpinner"; // Importez votre composant de chargement
 
 // Fonction pour tronquer la description
 const truncatedDescription = (desc) => {
   if (!desc) return "Aucune description disponible.";
-  
-  // Si la description fait moins de 150 caractères, on l'affiche en entier
-  if (desc.length <= 150) {
-    return desc;
-  }
-  
-  // Sinon, on tronque à 150 caractères, sans points de suspension
+  if (desc.length <= 150) return desc;
   return desc.slice(0, 150).trim();
 };
-
 
 // Composant Modal utilisant React Portal
 const Modal = ({ children, onClose }) => {
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full relative">
-        {/* Bouton de fermeture */}
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl leading-none"
@@ -168,7 +155,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/projects");
+        const response = await fetch("http://127.0.0.1:8000/api/projects-de-recherche");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -206,9 +193,7 @@ const Projects = () => {
   const statuses = [...new Set(projects.map((p) => p.status))];
   const domains = [...new Set(projects.map((p) => p.domain))];
 
-  if (loading) {
-    return <div className="text-center py-12">Chargement en cours...</div>;
-  }
+ 
   if (error) {
     return (
       <div className="text-center py-12 text-red-500">Erreur: {error}</div>
@@ -217,11 +202,22 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Balises SEO */}
+      <title>Projets de Recherche | Laboratoire de Chimie</title>
+      <meta
+        name="description"
+        content="Découvrez nos projets de recherche innovants en chimie et leurs impacts sur la science et la société."
+      />
+      <meta
+        name="keywords"
+        content="projets de recherche, chimie, laboratoire, innovation, science"
+      />
+
       <Header />
       <div className="bg-gradient-to-r from-darkGreen pt-26 text-dark py-10 sm:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
-            <h1 className="text-xl md:text-2xl lg:text-4xl font-bold mb-4">
+            <h1 className="text-xl md:text-2xl lg:text-4xl font-bold mt-10 mb-4">
               Projets de Recherche
             </h1>
             <p className="text-lg sm:text-xl opacity-90">
@@ -271,7 +267,11 @@ const Projects = () => {
             ))}
           </select>
         </div>
-
+        {loading && (
+            <div className="flex justify-center items-center min-h-[50vh]">
+              <LoadingSpinner />
+            </div>
+          )}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {filteredProjects.map((project, index) => (
             <ProjectCard key={index} {...project} />
@@ -288,4 +288,5 @@ const Projects = () => {
     </div>
   );
 };
+
 export default Projects;

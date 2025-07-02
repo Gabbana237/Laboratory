@@ -143,25 +143,26 @@ const ResearchUnitePage = () => {
 
           {/* Filtrage par catégorie */}
           <div className="bg-white p-4 shadow-md rounded-lg border border-gray-200">
-            <h2 className="text-lg font-bold mb-4 text-center">
-              Filtrer par catégorie
-            </h2>
-            <div className="flex justify-center gap-4">
-              {categories.map((cat) => (
-                <button
-                  key={cat.value}
-                  onClick={() => filterByCategory(cat.value)}
-                  className={`px-4 py-2 rounded-md ${
-                    activeCategory === cat.value
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-100 text-gray-700"
-                  } hover:bg-blue-400 transition duration-200`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-          </div>
+  <h2 className="text-lg font-bold mb-4 text-center">
+    Filtrer par catégorie
+  </h2>
+  <div className="flex flex-wrap sm:flex-nowrap justify-center gap-2 sm:gap-4">
+    {categories.map((cat) => (
+      <button
+        key={cat.value}
+        onClick={() => filterByCategory(cat.value)}
+        className={`px-4 py-2 rounded-md ${
+          activeCategory === cat.value
+            ? "bg-emerald-500 text-white" 
+            : "bg-gray-100 text-gray-700"
+        } hover:bg-emerald-600 transition duration-200`}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+</div>
+
         </div>
       </section>
 
@@ -219,7 +220,7 @@ const ResearchUnitePage = () => {
 
       {/* Modal pour afficher toutes les informations d'un membre */}
       {selectedMember && (
-        <div
+     <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
           onClick={() => setSelectedMember(null)}
         >
@@ -256,10 +257,7 @@ const ResearchUnitePage = () => {
                   <strong>Domaine :</strong> {selectedMember.research_domain}
                 </p>
                 <p className="text-gray-600 mb-2">
-                  <strong>Spécialisation :</strong> {selectedMember.specialization}
-                </p>
-                <p className="text-gray-600 mb-2">
-                  <strong>Publications :</strong> {selectedMember.publications}
+                  <strong>Spécialisation :</strong> {selectedMember.speciality}
                 </p>
                 <p className="text-gray-600 mb-2">
                   <strong>Email :</strong> {selectedMember.email}

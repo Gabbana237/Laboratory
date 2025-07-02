@@ -110,6 +110,19 @@ const Team = () => {
 
   return (
     <div className="bg-gray-100 font-sans text-gray-800">
+      {/* Balises SEO */}
+      <title>Notre Équipe | Laboratoire de Chimie URCHINGE</title>
+      <meta
+        name="description"
+        content="Découvrez notre équipe de responsables, chercheurs et anciens étudiants du laboratoire de chimie URCHINGE. Rencontrez nos experts en chimie analytique et organique."
+      />
+      <meta
+        name="keywords"
+        content="équipe, laboratoire de chimie, URCHINGE, responsables, anciens étudiants, chercheurs, chimie analytique, chimie organique"
+      />
+      <meta name="author" content="Laboratoire de Chimie URCHINGE" />
+      <meta name="robots" content="index, follow" />
+
       <Header />
       <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto text-center">
@@ -128,7 +141,7 @@ const Team = () => {
       </div>
 
       <div className="container mx-auto py-10 px-5">
-      {activeTab === "responsables" && (
+        {activeTab === "responsables" && (
           <div>
             <h2 className="text-2xl md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">Responsables</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -173,54 +186,52 @@ const Team = () => {
               </div>
             </div>
             <div className="mt-10">
-            <h2 className=" text-2xl lg:text-3xl font-bold text-darkGreen mb-5">Staff Technique</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Example: Staff Member 1 */}
-              <div className="bg-white shadow-lg rounded-lg p-5 text-center">
-                <img
-                  src="/images/technician1.jpg"
-                  alt="Technicien du laboratoire"
-                  className="rounded-full w-32 h-32 mx-auto mb-4 border-2 border-darkGreen object-cover"
-                />
-                <h3 className="text-xl font-semibold text-gray-800">Jean Dupont</h3>
-                <p className="text-sm text-gray-600">Technicien en Chimie Analytique</p>
-                <p className="mt-3 text-gray-600 text-sm">
-                  Manipule les équipements de pointe pour réaliser des analyses complexes.
-                </p>
-              </div>
-              {/* Example: Staff Member 2 */}
-              <div className="bg-white shadow-lg rounded-lg p-5 text-center">
-                <img
-                  src="/images/technician2.jpg"
-                  alt="Technicien du laboratoire"
-                  className="rounded-full w-32 h-32 mx-auto mb-4 border-2 border-darkGreen object-cover"
-                />
-                <h3 className="text-xl font-semibold text-gray-800">Claire Lefevre</h3>
-                <p className="text-sm text-gray-600">Assistante de Recherche</p>
-                <p className="mt-3 text-gray-600 text-sm">
-                  Soutient les chercheurs dans la mise en œuvre des protocoles expérimentaux.
-                </p>
-              </div>
-              {/* Example: Staff Member 3 */}
-              <div className="bg-white shadow-lg rounded-lg p-5 text-center">
-                <img
-                  src="/images/technician3.jpg"
-                  alt="Technicien du laboratoire"
-                  className="rounded-full w-32 h-32 mx-auto mb-4 border-2 border-darkGreen object-cover"
-                />
-                <h3 className="text-xl font-semibold text-gray-800">Paul Moreau</h3>
-                <p className="text-sm text-gray-600">Technicien en Chimie Organique</p>
-                <p className="mt-3 text-gray-600 text-sm">
-                  Expert en préparation des solutions chimiques pour les expériences.
-                </p>
+              <h2 className="text-2xl lg:text-3xl font-bold text-darkGreen mb-5">Staff Technique</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Example: Staff Member 1 */}
+                <div className="bg-white shadow-lg rounded-lg p-5 text-center">
+                  <img
+                    src="/images/technician1.jpg"
+                    alt="Technicien du laboratoire"
+                    className="rounded-full w-32 h-32 mx-auto mb-4 border-2 border-darkGreen object-cover"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800">Jean Dupont</h3>
+                  <p className="text-sm text-gray-600">Technicien en Chimie Analytique</p>
+                  <p className="mt-3 text-gray-600 text-sm">
+                    Manipule les équipements de pointe pour réaliser des analyses complexes.
+                  </p>
+                </div>
+                {/* Example: Staff Member 2 */}
+                <div className="bg-white shadow-lg rounded-lg p-5 text-center">
+                  <img
+                    src="/images/technician2.jpg"
+                    alt="Technicien du laboratoire"
+                    className="rounded-full w-32 h-32 mx-auto mb-4 border-2 border-darkGreen object-cover"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800">Claire Lefevre</h3>
+                  <p className="text-sm text-gray-600">Assistante de Recherche</p>
+                  <p className="mt-3 text-gray-600 text-sm">
+                    Soutient les chercheurs dans la mise en œuvre des protocoles expérimentaux.
+                  </p>
+                </div>
+                {/* Example: Staff Member 3 */}
+                <div className="bg-white shadow-lg rounded-lg p-5 text-center">
+                  <img
+                    src="/images/technician3.jpg"
+                    alt="Technicien du laboratoire"
+                    className="rounded-full w-32 h-32 mx-auto mb-4 border-2 border-darkGreen object-cover"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800">Paul Moreau</h3>
+                  <p className="text-sm text-gray-600">Technicien en Chimie Organique</p>
+                  <p className="mt-3 text-gray-600 text-sm">
+                    Expert en préparation des solutions chimiques pour les expériences.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-
-       </div>
-          
         )}
-        
+
         {activeTab === "oldersStudent" && (
           <div>
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">Les Anciens Étudiants</h2>

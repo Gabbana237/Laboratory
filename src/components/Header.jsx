@@ -23,19 +23,19 @@ const Header = () => {
     },
     {
       label: "Recherches",
-      href: "/projects",
+      href: "/projects-de-recherche",
     },
     {
       label: "Actualités",
       
       subItems: [
-        { label: "Nouvelles récentes", href: "/recent-news" },
-        { label: "Événements à venir", href: "/upcoming-events" },
+        { label: "Nouvelles récentes", href: "/actualite-recente" },
+        { label: "Événements à venir", href: "/actualite-a-venir" },
       ],
     },
     {
       label: "Équipe",
-      href: "/team",
+      href: "/equipe",
     },
     {
       label: "Équipement",
@@ -43,7 +43,7 @@ const Header = () => {
     },
     {
       label: "À propos",
-      href: "/about",
+      href: "/a-propos",
     },
     {
       label: "Contact",
@@ -128,56 +128,58 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <nav className="space-y-1 p-4">
-            {navItems.map((item, index) => (
-              <div key={index} className="border-b border-gray-100">
-                <div className="flex justify-between items-center py-2">
-                  <a
-                    href={item.href}
-                    className={`text-darkGreen font-medium hover:text-green-700 ${
-                      location.pathname === item.href
-                        ? "font-bold underline decoration-green-500 decoration-2"
-                        : "no-underline"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                  {item.subItems?.length > 0 && (
-                    <button
-                      onClick={() => handleDropdownToggle(index)}
-                      className="text-darkGreen p-2"
-                    >
-                      {activeDropdown === index ? (
-                        <ChevronUp className="w-5 h-5" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5" />
-                      )}
-                    </button>
+  <div className="md:hidden bg-white shadow-lg">
+    <nav className="space-y-1 p-4">
+      {navItems.map((item, index) => (
+        <div key={index} className="border-b border-gray-100">
+          <div className="flex justify-between items-center py-2">
+            <div
+              onClick={() => handleDropdownToggle(index)}
+              className="flex justify-between items-center w-full cursor-pointer"
+            >
+              <a
+                href={item.href}
+                className={`text-darkGreen font-medium hover:text-green-700 ${
+                  location.pathname === item.href
+                    ? "font-bold underline decoration-green-500 decoration-2"
+                    : "no-underline"
+                }`}
+              >
+                {item.label}
+              </a>
+              {item.subItems?.length > 0 && (
+                <div className="text-darkGreen p-2">
+                  {activeDropdown === index ? (
+                    <ChevronUp className="w-5 h-5" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5" />
                   )}
                 </div>
-                {activeDropdown === index && (
-                  <div className="mt-1 pl-4 pb-2">
-                    {item.subItems.map((subItem, subIndex) => (
-                      <a
-                        key={subIndex}
-                        href={subItem.href}
-                        className={`block py-3 text-sm text-darkGreen hover:bg-green-50 rounded ${
-                          location.pathname === subItem.href
-                            ? "font-bold underline decoration-green-500 decoration-2"
-                            : "no-underline"
-                        }`}
-                      >
-                        {subItem.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
+              )}
+            </div>
+          </div>
+          {activeDropdown === index && (
+            <div className="mt-1 pl-4 pb-2">
+              {item.subItems.map((subItem, subIndex) => (
+                <a
+                  key={subIndex}
+                  href={subItem.href}
+                  className={`block py-3 text-sm text-darkGreen hover:bg-green-50 rounded ${
+                    location.pathname === subItem.href
+                      ? "font-bold underline decoration-green-500 decoration-2"
+                      : "no-underline"
+                  }`}
+                >
+                  {subItem.label}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      ))}
+    </nav>
+  </div>
+)}
     </header>
   );
 };
