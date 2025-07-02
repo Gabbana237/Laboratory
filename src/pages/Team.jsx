@@ -324,7 +324,7 @@ const Team = () => {
                       />
                       <div className="ml-4">
                         <h4 className="text-lg font-semibold text-gray-800">{collab.nom}</h4>
-                        <p className="text-sm text-blue-600 font-medium">{collab.poste}</p>
+                      
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -332,11 +332,9 @@ const Team = () => {
                         <span className="font-medium">Institution:</span> {collab.institution}
                       </p>
                       <p className="text-sm text-gray-600">
-                        <span className="font-medium">Domaine:</span> {collab.domaine}
+                        <span className="font-medium">Pays:</span> {collab.domaine}
                       </p>
-                      <p className="text-sm text-gray-600">
-                        <span className="font-medium">Email:</span> {collab.email}
-                      </p>
+                     
                     </div>
                   </div>
                 ))}
