@@ -7,13 +7,12 @@ import axios from "axios";
 const ResearchUnitePage = () => {
   const [members, setMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("all");
   const [selectedDomain, setSelectedDomain] = useState("all");
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedMember, setSelectedMember] = useState(null);
+  const [domains, setDomains] = useState([]);
   const location = useLocation();
 
-  // Lors du montage, si un paramètre "domain" est présent dans l'URL, on le définit comme filtre
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const domainParam = searchParams.get("domain");
@@ -22,151 +21,114 @@ const ResearchUnitePage = () => {
     }
   }, [location]);
 
-  // Récupération des membres depuis l'API
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/members")
-      .then((response) => {
-        setMembers(response.data);
-        setFilteredMembers(response.data);
-      })
-      .catch((error) =>
-        console.error("Erreur lors de la récupération des membres :", error)
-      );
+    const fetchData = async () => {
+      try {
+        const [membersRes, domainsRes] = await Promise.all([
+          axios.get("http://127.0.0.1:8000/api/members"),
+          axios.get("http://127.0.0.1:8000/api/research-domains"),
+        ]);
+        setMembers(membersRes.data);
+        setFilteredMembers(membersRes.data);
+        setDomains(domainsRes.data);
+      } catch (error) {
+        console.error("Erreur de chargement :", error);
+      }
+    };
+    fetchData();
   }, []);
 
-  // Mise à jour des résultats filtrés dès que l'un des filtres change
   useEffect(() => {
-    let filtered = members;
-
-    if (selectedYear !== "all") {
-      filtered = filtered.filter(
-        (member) => member.year.toString() === selectedYear
-      );
-    }
+    let filtered = [...members];
 
     if (selectedDomain !== "all") {
       filtered = filtered.filter(
         (member) =>
-          member.research_domain.toLowerCase() === selectedDomain.toLowerCase()
+          member.research_domain?.toLowerCase() ===
+          selectedDomain.toLowerCase()
       );
     }
-    
 
     if (activeCategory !== "all") {
-      filtered = filtered.filter(
-        (member) => member.category === activeCategory
-      );
+      filtered = filtered.filter((member) => member.category === activeCategory);
     }
 
     setFilteredMembers(filtered);
-  }, [members, selectedYear, selectedDomain, activeCategory]);
+  }, [members, selectedDomain, activeCategory]);
 
-  // Gestion des filtres
-  const handleFilterYear = (e) => setSelectedYear(e.target.value);
   const handleFilterDomain = (e) => setSelectedDomain(e.target.value);
   const filterByCategory = (category) => setActiveCategory(category);
 
-  // Liste d'années (année en cours à 10 ans en arrière)
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 11 }, (_, i) => currentYear - i);
-
-  // Définition des catégories selon la migration
   const categories = [
     { value: "all", label: "Toutes" },
     { value: "docteur", label: "Docteur" },
-    { value: "doctorant", label: "Doctorant" },
-    { value: "masterient", label: "Masterient" },
+    { value: "maitre_de_conferences", label: "Maître de conférences" },
+    { value: "charge_de_cours", label: "Chargé de cours" },
     { value: "professeur", label: "Professeur" },
   ];
 
-  // Fonction pour tronquer la description sur les cartes
   const truncateText = (text, maxLength) =>
-    text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    text?.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
       <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto text-center">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen pt-4 md:pt-6 lg:pt-10">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen pt-4">
             Membres de l'unité
           </h1>
           <p className="mt-4 text-sm lg:text-lg text-gray-600">
-            Découvrez les membres de l'unité, filtrés par année, domaine et
-            catégorie.
+            Découvrez les membres de l'unité, filtrés par domaine et catégorie.
           </p>
         </div>
       </header>
 
-      {/* Section des filtres */}
       <section className="py-10 px-4">
         <div className="max-w-7xl mx-auto space-y-6">
-          {/* Filtrage par année et domaine */}
           <div className="bg-white p-4 shadow-md rounded-lg border border-gray-200">
             <h2 className="text-lg font-bold mb-4 text-center">
-              Filtrer par année et domaine
+              Filtrer par domaine
             </h2>
-            <div className="flex flex-col md:flex-row gap-4">
-              <select
-                value={selectedYear}
-                onChange={handleFilterYear}
-                className="block w-full md:w-1/2 px-4 py-2 border rounded-lg bg-gray-100 shadow-md text-gray-700"
-              >
-                <option value="all">Toutes les années</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    Année {year}
-                  </option>
-                ))}
-              </select>
-
+            <div className="flex justify-center">
               <select
                 value={selectedDomain}
                 onChange={handleFilterDomain}
                 className="block w-full md:w-1/2 px-4 py-2 border rounded-lg bg-gray-100 shadow-md text-gray-700"
               >
                 <option value="all">Tous les domaines</option>
-                {[
-                  "Chimie organique",
-                  "Chimie inorganique",
-                  "Chimie physique",
-                  "Chimie analytique",
-                ].map((domain) => (
-                  <option key={domain} value={domain}>
-                    {domain}
+                {domains.map((domain) => (
+                  <option key={domain.id} value={domain.title}>
+                    {domain.title}
                   </option>
                 ))}
               </select>
             </div>
           </div>
 
-          {/* Filtrage par catégorie */}
           <div className="bg-white p-4 shadow-md rounded-lg border border-gray-200">
-  <h2 className="text-lg font-bold mb-4 text-center">
-    Filtrer par catégorie
-  </h2>
-  <div className="flex flex-wrap sm:flex-nowrap justify-center gap-2 sm:gap-4">
-    {categories.map((cat) => (
-      <button
-        key={cat.value}
-        onClick={() => filterByCategory(cat.value)}
-        className={`px-4 py-2 rounded-md ${
-          activeCategory === cat.value
-            ? "bg-emerald-500 text-white" 
-            : "bg-gray-100 text-gray-700"
-        } hover:bg-emerald-600 transition duration-200`}
-      >
-        {cat.label}
-      </button>
-    ))}
-  </div>
-</div>
-
+            <h2 className="text-lg font-bold mb-4 text-center">
+              Filtrer par catégorie
+            </h2>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+              {categories.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => filterByCategory(cat.value)}
+                  className={`px-4 py-2 rounded-md ${
+                    activeCategory === cat.value
+                      ? "bg-emerald-500 text-white"
+                      : "bg-gray-100 text-gray-700"
+                  } hover:bg-emerald-600 transition duration-200`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Affichage des membres */}
       <main className="py-10 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredMembers.map((member) => (
@@ -181,14 +143,14 @@ const ResearchUnitePage = () => {
                       ? `http://127.0.0.1:8000/storage/${member.image}`
                       : "https://via.placeholder.com/150?text=Avatar"
                   }
-                  alt={`${member.name}'s avatar`}
+                  alt={member.name}
                   className="w-24 h-24 rounded-full object-cover mb-4"
                 />
                 <h3 className="text-xl font-bold text-gray-800">
                   {member.name}
                 </h3>
                 <p className="text-sm text-gray-500 mb-2">
-                  {member.category} • Année {member.year}
+                  {member.category}
                 </p>
                 <p className="text-sm text-gray-600">
                   <strong>Domaine :</strong> {member.research_domain}
@@ -197,7 +159,6 @@ const ResearchUnitePage = () => {
                   <strong>Spécialisation :</strong> {member.speciality}
                 </p>
               </div>
-              {/* Description tronquée pour uniformiser les cartes */}
               <div className="mt-4 flex-grow">
                 <p className="text-sm text-gray-700">
                   {truncateText(member.description, 100)}
@@ -218,9 +179,8 @@ const ResearchUnitePage = () => {
 
       <Footer />
 
-      {/* Modal pour afficher toutes les informations d'un membre */}
       {selectedMember && (
-     <div
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
           onClick={() => setSelectedMember(null)}
         >
@@ -247,12 +207,8 @@ const ResearchUnitePage = () => {
                 />
               </div>
               <div className="md:w-2/3 md:pl-6 mt-4 md:mt-0">
-                <h2 className="text-2xl font-bold mb-2">
-                  {selectedMember.name}
-                </h2>
-                <p className="text-gray-500 mb-4">
-                  {selectedMember.category} • Année {selectedMember.year}
-                </p>
+                <h2 className="text-2xl font-bold mb-2">{selectedMember.name}</h2>
+                <p className="text-gray-500 mb-4">{selectedMember.category}</p>
                 <p className="text-gray-600 mb-2">
                   <strong>Domaine :</strong> {selectedMember.research_domain}
                 </p>
@@ -263,9 +219,7 @@ const ResearchUnitePage = () => {
                   <strong>Email :</strong> {selectedMember.email}
                 </p>
                 <div className="mt-4">
-                  <p className="text-gray-700">
-                    {selectedMember.description}
-                  </p>
+                  <p className="text-gray-700">{selectedMember.description}</p>
                 </div>
               </div>
             </div>
