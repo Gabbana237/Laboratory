@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { GraduationCap, User, Calendar, Search, FileText, Award, Clock, Download, RefreshCw, AlertCircle } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -12,7 +12,6 @@ const apiService = {
   getTheses: async (params = {}) => {
     try {
       const searchParams = new URLSearchParams();
-      
       // Ajouter les paramètres de recherche
       if (params.search) searchParams.append('search', params.search);
       if (params.type) searchParams.append('type', params.type);
@@ -23,7 +22,7 @@ const apiService = {
       if (params.per_page) searchParams.append('per_page', params.per_page);
 
       const url = `${API_BASE_URL}/theses${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -43,29 +42,6 @@ const apiService = {
       throw error;
     }
   },
-
-  // Récupérer les filtres disponibles
-  getFilters: async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/theses/filters`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Erreur lors de la récupération des filtres:', error);
-      throw error;
-    }
-  },
-
   // Télécharger un PDF
   downloadPdf: async (thesisId) => {
     try {
@@ -140,7 +116,6 @@ const ThesisCard = ({
 
   const handleDownload = async () => {
     if (!pdf_url && !id) return;
-    
     setDownloading(true);
     try {
       if (pdf_url) {
@@ -276,18 +251,13 @@ const ThesisCard = ({
               Voir résumé complet
             </button>
           )}
-          
-        
         </div>
-
-       
       </div>
 
       {showModal && (
         <Modal onClose={closeModal}>
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-gray-800">{title}</h3>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
                 <p><strong>Auteur:</strong> {author}</p>
@@ -303,7 +273,6 @@ const ThesisCard = ({
                 <p><strong>Statut:</strong> {status}</p>
               </div>
             </div>
-
             <div>
               <h4 className="text-lg font-semibold text-gray-700 mb-2">Résumé</h4>
               {summary ? (
@@ -316,9 +285,6 @@ const ThesisCard = ({
                 </p>
               )}
             </div>
-
-        
-
             <div className="flex gap-3 pt-4">
               {(pdf_url || id) && (
                 <button
@@ -409,7 +375,6 @@ const ThesesMemoires = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [domainFilter, setDomainFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
-  
   const [theses, setTheses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -420,12 +385,12 @@ const ThesesMemoires = () => {
     per_page: 10
   });
 
-  // Filtres disponibles
+  // Filtres disponibles (statiques ou récupérés via une API différente si nécessaire)
   const [filters, setFilters] = useState({
-    types: [],
-    statuses: [],
-    domains: [],
-    years: []
+    types: ["Thèse", "Mémoire"],
+    statuses: ["Soutenue", "En cours", "Déposée"],
+     domains: ["Chimie organique", "Chimie inorganique", "Chimie analytique", "Chimie physique", "Chimie environnementale", "Biochimie"],
+    years: Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i).map(String)
   });
 
   // Debounce pour la recherche
@@ -435,30 +400,14 @@ const ThesesMemoires = () => {
     const timer = setTimeout(() => {
       setSearchDebounce(searchQuery);
     }, 500);
-
     return () => clearTimeout(timer);
   }, [searchQuery]);
-
-  // Charger les filtres disponibles
-  useEffect(() => {
-    const loadFilters = async () => {
-      try {
-        const filtersData = await apiService.getFilters();
-        setFilters(filtersData);
-      } catch (error) {
-        console.error('Erreur lors du chargement des filtres:', error);
-      }
-    };
-
-    loadFilters();
-  }, []);
 
   // Charger les thèses
   useEffect(() => {
     const loadTheses = async () => {
       setLoading(true);
       setError(null);
-      
       try {
         const params = {
           search: searchDebounce,
@@ -471,7 +420,7 @@ const ThesesMemoires = () => {
         };
 
         const response = await apiService.getTheses(params);
-        
+
         if (response.data) {
           setTheses(response.data);
           setPagination({
@@ -512,7 +461,7 @@ const ThesesMemoires = () => {
       };
 
       const response = await apiService.getTheses(params);
-      
+
       if (response.data) {
         setTheses(response.data);
         setPagination({
@@ -541,10 +490,28 @@ const ThesesMemoires = () => {
     setYearFilter("");
   };
 
+  // Filtrage frontend (supprimé car le filtrage est maintenant fait via l'API backend)
+  // const filteredTheses = useMemo(() => {
+  //   return theses.filter(thesis => {
+  //     const matchesSearch = !searchQuery || 
+  //       thesis.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       thesis.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       thesis.summary.toLowerCase().includes(searchQuery.toLowerCase());
+  //     
+  //     const matchesType = !typeFilter || thesis.type === typeFilter;
+  //     const matchesStatus = !statusFilter || thesis.status === statusFilter;
+  //     const matchesDomain = !domainFilter || thesis.domain === domainFilter;
+  //     const matchesYear = !yearFilter || thesis.year.toString() === yearFilter;
+  //     
+  //     return matchesSearch && matchesType && matchesStatus && matchesDomain && matchesYear;
+  //   });
+  // }, [theses, searchQuery, typeFilter, statusFilter, domainFilter, yearFilter]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
       <Header/>
+      
       <div className="bg-gradient-to-r from-darkGreen pt-26 text-dark py-10 sm:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
@@ -580,7 +547,7 @@ const ThesesMemoires = () => {
               </button>
             </div>
           </div>
-
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -592,7 +559,7 @@ const ThesesMemoires = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-
+            
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
@@ -605,7 +572,7 @@ const ThesesMemoires = () => {
                 </option>
               ))}
             </select>
-
+            
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -618,7 +585,7 @@ const ThesesMemoires = () => {
                 </option>
               ))}
             </select>
-
+            
             <select
               value={domainFilter}
               onChange={(e) => setDomainFilter(e.target.value)}
@@ -631,7 +598,7 @@ const ThesesMemoires = () => {
                 </option>
               ))}
             </select>
-
+            
             <select
               value={yearFilter}
               onChange={(e) => setYearFilter(e.target.value)}
@@ -651,10 +618,7 @@ const ThesesMemoires = () => {
         {!loading && !error && (
           <div className="flex justify-between items-center mb-6">
             <p className="text-gray-600">
-              {pagination.total > 0 
-                ? `${pagination.total} résultat${pagination.total > 1 ? 's' : ''} trouvé${pagination.total > 1 ? 's' : ''}`
-                : 'Aucun résultat trouvé'
-              }
+             
             </p>
             {pagination.total > 0 && (
               <p className="text-sm text-gray-500">
@@ -733,6 +697,7 @@ const ThesesMemoires = () => {
           </div>
         )}
       </div>
+      
       <Footer/>
     </div>
   );
