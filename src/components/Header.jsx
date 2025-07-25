@@ -25,6 +25,10 @@ const Header = () => {
       label: "Recherches",
       href: "/projects-de-recherche",
     },
+     {
+      label: "Theses",
+      href: "/these",
+    },
     {
       label: "Actualités",
       
