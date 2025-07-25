@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Beaker, Users, Clock, Search, Globe } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import LoadingSpinner from "../components/LoadingSpinner"; // Importez votre composant de chargement
+import LoadingSpinner from "../components/LoadingSpinner";
 
 // Fonction pour tronquer la description
 const truncatedDescription = (desc) => {
@@ -30,6 +30,7 @@ const Modal = ({ children, onClose }) => {
   );
 };
 
+// Carte d'un projet
 const ProjectCard = ({
   title,
   status,
@@ -102,9 +103,7 @@ const ProjectCard = ({
 
         {partners && (
           <div className="mt-4">
-            <h4 className="text-sm font-semibold text-gray-700">
-              Partenaires :
-            </h4>
+            <h4 className="text-sm font-semibold text-gray-700">Partenaires :</h4>
             <div className="flex flex-wrap gap-2 mt-1">
               {partners.split(", ").map((partner, index) => (
                 <span
@@ -144,6 +143,43 @@ const ProjectCard = ({
   );
 };
 
+// Carte Skeleton (chargement)
+const ProjectCardSkeleton = () => {
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+      <div className="relative h-48 sm:h-56 bg-gray-300"></div>
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-wrap gap-3 text-gray-400 text-xs sm:text-sm mb-3">
+          <div className="flex items-center">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 mr-1 bg-gray-300 rounded-full"></div>
+            <span className="h-4 bg-gray-300 rounded w-12"></span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 mr-1 bg-gray-300 rounded-full"></div>
+            <span className="h-4 bg-gray-300 rounded w-16"></span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 mr-1 bg-gray-300 rounded-full"></div>
+            <span className="h-4 bg-gray-300 rounded w-16"></span>
+          </div>
+        </div>
+
+        <h3 className="h-6 bg-gray-300 rounded w-3/4 mb-2"></h3>
+        <p className="h-4 bg-gray-200 rounded w-full mb-2"></p>
+        <p className="h-4 bg-gray-200 rounded w-5/6 mb-4"></p>
+
+        <div className="mt-4">
+          <h4 className="h-4 bg-gray-300 rounded w-1/4 mb-2"></h4>
+          <div className="flex flex-wrap gap-2 mt-1">
+            <span className="h-5 bg-gray-200 rounded w-20"></span>
+            <span className="h-5 bg-gray-200 rounded w-24"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Projects = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -157,13 +193,13 @@ const Projects = () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/projects-de-recherche");
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Erreur réseau");
         }
         const result = await response.json();
         if (result.success && Array.isArray(result.data)) {
           setProjects(result.data);
         } else {
-          throw new Error("Invalid response format");
+          throw new Error("Format de réponse invalide");
         }
       } catch (error) {
         setError(error.message);
@@ -178,10 +214,9 @@ const Projects = () => {
     .filter((project) => {
       const searchLower = searchQuery.toLowerCase();
       const matchesSearch =
-        project.title.toLowerCase().includes(searchLower) ||
-        project.description.toLowerCase().includes(searchLower) ||
-        (project.keywords &&
-          project.keywords.toLowerCase().includes(searchLower));
+        project.title?.toLowerCase().includes(searchLower) ||
+        project.description?.toLowerCase().includes(searchLower) ||
+        (project.keywords && project.keywords.toLowerCase().includes(searchLower));
       return matchesSearch;
     })
     .filter(
@@ -192,13 +227,6 @@ const Projects = () => {
 
   const statuses = [...new Set(projects.map((p) => p.status))];
   const domains = [...new Set(projects.map((p) => p.domain))];
-
- 
-  if (error) {
-    return (
-      <div className="text-center py-12 text-red-500">Erreur: {error}</div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -267,20 +295,29 @@ const Projects = () => {
             ))}
           </select>
         </div>
-        {loading && (
-            <div className="flex justify-center items-center min-h-[50vh]">
-              <LoadingSpinner />
-            </div>
-          )}
+
+        {/* Affichage conditionnel selon l'état de chargement */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
+          {loading
+            ? // Afficher les skeletons pendant le chargement
+              Array.from({ length: 6 }).map((_, index) => (
+                <ProjectCardSkeleton key={index} />
+              ))
+            : filteredProjects.length > 0
+            ? // Afficher les vrais projets
+              filteredProjects.map((project, index) => (
+                <ProjectCard key={index} {...project} />
+              ))
+            : // Aucun projet trouvé
+              <div className="col-span-full text-center text-gray-500 py-8">
+                Aucun projet trouvé.
+              </div>}
         </div>
 
-        {filteredProjects.length === 0 && (
-          <div className="text-center text-gray-500">
-            Aucun projet trouvé.
+        {/* Message optionnel de chargement */}
+        {loading && (
+          <div className="text-center py-4 text-gray-500">
+            Chargement des projets...
           </div>
         )}
       </div>

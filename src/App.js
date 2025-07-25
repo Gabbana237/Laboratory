@@ -8,7 +8,9 @@ import Team from "./pages/Team";
 import CurrentResearch from "./pages/CurrentResearch";
 import Projects from "./pages/Projects";
 import Equipments from "./pages/Equipments";
+import ThesesMemoires from "./pages/ThesesMemoires";
 import ResearchUnitePage from "./components/Home/ResearchUnitePage";
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/current-research" element={<CurrentResearch />} />
         <Route path="/projects-de-recherche" element={<Projects />} />
         <Route path="/equipe" element={<Team />} />
+        <Route path="/these" element={<ThesesMemoires/>} />
         <Route path="/equipment" element={<Equipments />} />
         <Route path="/research" element={<ResearchUnitePage />} />
       </Routes>
