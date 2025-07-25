@@ -78,16 +78,16 @@ const ContactUs = () => {
         <div className="bg-white p-4 rounded-lg shadow-md text-center mt-8 md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">📍</div>
           <h3 className="text-md font-bold mb-2">NOTRE SIÈGE PRINCIPAL</h3>
-          <p className="text-sm">Université de Dschang, Afrique, Cameroun </p>
-          <p className="text-sm">Porte <span className="font-bold text-darkGreen">417</span> du batiment principale de la Facultes des sciences</p>
+          <p className="text-sm">Faculté des Sciences, Département de Chimie </p>
+          <p className="text-sm">Porte <span className="font-bold text-darkGreen">417</span>  Campus C</p>
         </div>
 
         {/* Carte: Téléphone */}
         <div className="bg-white p-4 rounded-lg shadow-md text-center md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">📞</div>
           <h3 className="text-md font-bold mb-2">NUMÉRO DE TÉLÉPHONE</h3>
-          <p className="text-sm">691224241</p>
-          <p className="text-sm">672116339(Numéro gratuit)</p>
+          <p className="text-sm">Prof. TONLE KENFACK Ignas</p>
+          <p className="text-sm"> Tel : 696 141 545</p>
         </div>
 
         {/* Carte: Fax */}
@@ -101,7 +101,7 @@ const ContactUs = () => {
         <div className="bg-white p-4 rounded-lg shadow-md text-center md:mt-10 lg:mt-16">
           <div className="text-blue-500 text-3xl mb-3">✉️</div>
           <h3 className="text-md font-bold mb-2">EMAIL</h3>
-          <p className="text-sm">contact@theme.com</p>
+          <p className="text-sm">ignas.tonle@univ-dschang.org ou itonle@yahoo.com</p>
         </div>
       </div>
 

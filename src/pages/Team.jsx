@@ -20,6 +20,94 @@ const Team = () => {
     return student.annee_debut <= selectedGuestDate && student.annee_sortie >= selectedGuestDate;
   });
 
+  // Données simulées pour les collaborateurs
+  const collaborateursNationaux = [
+    {
+      id: 1,
+      nom: "Dr. Marie Tchougang",
+      poste: "Chercheur Principal",
+      institution: "Université de Yaoundé I",
+      domaine: "Chimie Environnementale",
+      photo: "/images/collab1.jpg",
+      email: "marie.tchougang@univ-yaounde1.cm"
+    },
+    {
+      id: 2,
+      nom: "Prof. Jean-Baptiste Nkeng",
+      poste: "Professeur",
+      institution: "Université de Douala",
+      domaine: "Analyse Spectroscopique",
+      photo: "/images/collab2.jpg",
+      email: "jb.nkeng@univ-douala.cm"
+    },
+    {
+      id: 3,
+      nom: "Dr. Françoise Mballa",
+      poste: "Directrice de Recherche",
+      institution: "IRAD Cameroun",
+      domaine: "Chimie des Matériaux",
+      photo: "/images/collab3.jpg",
+      email: "f.mballa@irad.cm"
+    },
+    {
+      id: 4,
+      nom: "Dr. Paul Biyong",
+      poste: "Chef de Département",
+      institution: "Université de Dschang",
+      domaine: "Chimie Organique",
+      photo: "/images/collab4.jpg",
+      email: "p.biyong@univ-dschang.cm"
+    }
+  ];
+
+  const collaborateursInternationaux = [
+    {
+      id: 5,
+      nom: "Prof. Sarah Johnson",
+      poste: "Professeur Associé",
+      institution: "University of Oxford, UK",
+      domaine: "Chimie Analytique Avancée",
+      photo: "/images/collab5.jpg",
+      email: "sarah.johnson@ox.ac.uk"
+    },
+    {
+      id: 6,
+      nom: "Dr. Ahmed Ben Ali",
+      poste: "Directeur de Laboratoire",
+      institution: "Université de Tunis, Tunisie",
+      domaine: "Nanotechnologie",
+      photo: "/images/collab6.jpg",
+      email: "ahmed.benali@utunis.tn"
+    },
+    {
+      id: 7,
+      nom: "Prof. Michel Dubois",
+      poste: "Chercheur Senior",
+      institution: "CNRS, France",
+      domaine: "Chimie Verte",
+      photo: "/images/collab7.jpg",
+      email: "michel.dubois@cnrs.fr"
+    },
+    {
+      id: 8,
+      nom: "Dr. Kwame Asante",
+      poste: "Professeur",
+      institution: "University of Ghana",
+      domaine: "Chimie Pharmaceutique",
+      photo: "/images/collab8.jpg",
+      email: "k.asante@ug.edu.gh"
+    },
+    {
+      id: 9,
+      nom: "Prof. Lisa Chen",
+      poste: "Directrice de Recherche",
+      institution: "MIT, USA",
+      domaine: "Biotechnologie",
+      photo: "/images/collab9.jpg",
+      email: "lisa.chen@mit.edu"
+    }
+  ];
+
   return (
     <div className="bg-gray-100 font-sans text-gray-800">
       {/* Balises SEO */}
@@ -48,6 +136,7 @@ const Team = () => {
         <div className="flex justify-center space-x-5 border-b">
           <button className={`py-2 px-4 text-sm lg:text-base ${activeTab === "responsables" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"}`} onClick={() => setActiveTab("responsables")}>Responsables</button>
           <button className={`py-2 px-4 text-sm lg:text-base ${activeTab === "oldersStudent" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"}`} onClick={() => setActiveTab("oldersStudent")}>Anciens Étudiants</button>
+          <button className={`py-2 px-4 text-sm lg:text-base ${activeTab === "collaborateurs" ? "border-b-4 border-darkGreen font-bold text-darkGreen" : "text-gray-600"}`} onClick={() => setActiveTab("collaborateurs")}>Collaborateurs</button>
         </div>
       </div>
 
@@ -188,6 +277,80 @@ const Team = () => {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === "collaborateurs" && (
+          <div>
+            <h2 className="text-2xl md:text-2xl lg:text-3xl font-bold text-darkGreen mb-8">Nos Collaborateurs</h2>
+            
+            {/* Collaborateurs Nationaux */}
+            <div className="mb-12">
+              <h3 className="text-xl md:text-2xl font-bold text-darkGreen mb-6 border-b-2 border-gray-200 pb-2">
+                Collaborateurs Nationaux
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {collaborateursNationaux.map((collab) => (
+                  <div key={collab.id} className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4">
+                    <div className="flex items-center mb-4">
+                      <img 
+                        src={collab.photo} 
+                        alt={collab.nom}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-darkGreen"
+                      />
+                      <div className="ml-4">
+                        <h4 className="text-lg font-semibold text-gray-800">{collab.nom}</h4>
+                        <p className="text-sm text-darkGreen font-medium">{collab.poste}</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Institution:</span> {collab.institution}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Domaine:</span> {collab.domaine}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Email:</span> {collab.email}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Collaborateurs Internationaux */}
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold text-darkGreen mb-6 border-b-2 border-gray-200 pb-2">
+                Collaborateurs Internationaux
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {collaborateursInternationaux.map((collab) => (
+                  <div key={collab.id} className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4">
+                    <div className="flex items-center mb-4">
+                      <img 
+                        src={collab.photo} 
+                        alt={collab.nom}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-darkGreen"
+                      />
+                      <div className="ml-4">
+                        <h4 className="text-lg font-semibold text-gray-800">{collab.nom}</h4>
+                      
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Institution:</span> {collab.institution}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Pays:</span> {collab.domaine}
+                      </p>
+                     
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
