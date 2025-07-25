@@ -24,7 +24,7 @@ const ResearchDomains = () => {
       <div className="max-w-7xl mx-auto text-center mb-12">
         <h2 className="text-3xl font-bold">Domaines de Recherche</h2>
         <p className="mt-4 text-gray-600">
-          Explorez nos principaux axes de recherche.
+          Explorez nos principaux Axes de recherche et Membres.
         </p>
       </div>
 
@@ -37,7 +37,7 @@ const ResearchDomains = () => {
           {domains.map((domain) => (
             <div
               key={domain.id}
-              className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
+              className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition h-full flex flex-col min-h-[500px]"
             >
               {domain.image && (
                 <img
@@ -46,15 +46,28 @@ const ResearchDomains = () => {
                   className="w-full h-56 object-cover"
                 />
               )}
-              <div className="p-6">
-                <h3 className="text-xl font-bold">{domain.title}</h3>
-                <p className="text-gray-600 mt-2 line-clamp-3">
-                  {domain.description}
-                </p>
-                <div className="mt-4">
+
+              <div className="p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 className="text-xl font-bold mb-2">{domain.title}</h3>
+                  {/* ✅ Responsable ajouté ici */}
+                  {domain.responsable && (
+                    <p className="text-sm text-gray-600 mb-3">
+                      <strong>Responsable :</strong> {domain.responsable}
+                    </p>
+                  )}
+
+                  <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+                    {domain.thematiques?.map((theme, index) => (
+                      <li key={index}>{theme}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-6">
                   <Link
                     to={`/research?domain=${encodeURIComponent(domain.title)}`}
-                    className="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-white bg-darkGreen rounded-full shadow-md transition duration-300 hover:bg-green-500 hover:scale-105 active:scale-95"
                   >
                     En savoir plus
                   </Link>
