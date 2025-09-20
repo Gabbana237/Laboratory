@@ -7,6 +7,7 @@ const Team = () => {
   const [selectedGuestDate, setSelectedGuestDate] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [invitedStudents, setInvitedStudents] = useState([]);
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
 
   // États pour la pagination des collaborateurs
   const [visibleNational, setVisibleNational] = useState(6);
@@ -23,12 +24,17 @@ const Team = () => {
 
   const filteredStudents = invitedStudents.filter((student) => {
     if (!selectedGuestDate) return true;
-    return (
-      student.annee_debut <= selectedGuestDate &&
-      student.annee_sortie >= selectedGuestDate
-    );
+    return student.annee_etude.includes(selectedGuestDate);
   });
 
+  const toggleDescription = (studentId) => {
+    setExpandedDescriptions(prev => ({
+      ...prev,
+      [studentId]: !prev[studentId]
+    }));
+  };
+
+  
   // Collaborateurs Nationaux
   const collaborateursNationaux = [
     {
@@ -415,6 +421,7 @@ const Team = () => {
     }
   ];
 
+
   return (
     <div className="bg-gray-100 font-sans text-gray-800">
       {/* Balises SEO */}
@@ -434,8 +441,8 @@ const Team = () => {
 
       <header className="bg-gradient-to-r from-darkGreen pt-20 text-dark py-8 sm:py-16">
         <div className="container mx-auto text-center">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-darkGreen pt-4 md:pt-6 lg:pt-10">
-            Notre Équipe
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold pt-4 md:pt-6 lg:pt-10">
+            Equipements disponibles pour la recherche 
           </h1>
         </div>
       </header>
@@ -594,18 +601,19 @@ const Team = () => {
           </div>
         )}
 
-        {/* ANCIENS ÉTUDIANTS */}
         {activeTab === "oldersStudent" && (
-          <div>
-            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-darkGreen mb-5">
-              Les Anciens Étudiants
+          <div className="px-4 md:px-8 lg:px-16 py-6">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-darkGreen mb-6 text-center">
+              🎓 Nos Anciens Étudiants
             </h2>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+
+            {/* FILTRE PAR ANNÉE */}
+            <div className="mb-6 max-w-xs mx-auto">
+              <label className="block text-sm font-semibold text-gray-800 mb-2">
                 Filtrer par année :
               </label>
               <select
-                className="block w-full px-4 py-2 border border-darkGreen rounded-lg shadow-sm"
+                className="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-darkGreen"
                 value={selectedGuestDate}
                 onChange={(e) => setSelectedGuestDate(e.target.value)}
               >
@@ -619,84 +627,70 @@ const Team = () => {
                 )}
               </select>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredStudents.map((student) => (
-                <div
-                  key={student.id}
-                  className="bg-white shadow-xl rounded-lg p-6 border hover:shadow-2xl transition-shadow duration-300"
-                >
-                  <div className="flex items-center mb-4">
-                    <img
-                      src={
-                        student.photo
-                          ? `http://127.0.0.1:8000/storage/${student.photo}`
-                          : "/images/me.jpg"
-                      }
-                      alt={`${student.nom} ${student.prenom}`}
-                      className="w-16 h-16 rounded-full object-cover border border-gray-300"
-                    />
-                    <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-darkGreen">
-                        {student.nom} {student.prenom}
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        {student.annee_debut} - {student.annee_sortie}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-700">
-                    {student.description?.slice(0, 100)}...{" "}
-                    <span
-                      className="text-blue-500 cursor-pointer"
-                      onClick={() => setSelectedStudent(student)}
-                    >
-                      Voir plus
-                    </span>
-                  </p>
-                </div>
-              ))}
-            </div>
-            {selectedStudent && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-3/4 lg:w-1/2 relative">
-                  <button
-                    onClick={() => setSelectedStudent(null)}
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl"
+
+            {/* LISTE DES ÉTUDIANTS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredStudents.map((student) => {
+                const isExpanded = expandedDescriptions[student.id];
+                const description = student.description || '';
+                const shouldTruncate = description.length > 150 && !isExpanded;
+                const displayText = shouldTruncate ? `${description.substring(0, 150)}...` : description;
+
+                return (
+                  <div
+                    key={student.id}
+                    className="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
                   >
-                    &times;
-                  </button>
-                  <div className="flex flex-col md:flex-row items-center">
-                    <img
-                      src={
-                        selectedStudent.photo
-                          ? `http://127.0.0.1:8000/storage/${selectedStudent.photo}`
-                          : "/images/me.jpg"
-                      }
-                      alt={selectedStudent.nom}
-                      className="w-40 h-40 rounded-full object-cover border border-gray-300"
-                    />
-                    <div className="ml-6">
-                      <h3 className="text-2xl font-bold text-darkGreen mb-4">
-                        {selectedStudent.nom} {selectedStudent.prenom}
-                      </h3>
-                      <p className="text-gray-700">
-                        <strong>Année :</strong> {selectedStudent.annee_debut} -{" "}
-                        {selectedStudent.annee_sortie}
-                      </p>
-                      <p className="text-gray-700">
-                        <strong>Description :</strong>{" "}
-                        {selectedStudent.description}
-                      </p>
-                      <p className="text-gray-700">
-                        <strong>Email :</strong> {selectedStudent.email}
-                      </p>
-                      <p className="text-gray-700">
-                        <strong>Téléphone :</strong> {selectedStudent.telephone}
-                      </p>
+                    <div className="flex items-center gap-4 mb-4">
+                      <img
+                        src={
+                          student.photo
+                            ? `http://127.0.0.1:8000/storage/${student.photo}`
+                            : "/images/me.jpg"
+                        }
+                        alt={`${student.nom} ${student.prenom}`}
+                        className="w-16 h-16 rounded-full object-cover border border-gray-300"
+                      />
+                      <div>
+                        <h3 className="text-lg font-bold text-darkGreen">
+                          {student.nom} {student.prenom}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          Année d'étude : {student.annee_etude}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="text-sm text-gray-700 space-y-1 flex-grow">
+                      <p><strong>Email :</strong> {student.email}</p>
+                      <p><strong>Domaine de recherche :</strong> {student.domaine_recherche}</p>
+                      <p><strong>Nombre de publications :</strong> {student.nombre_publications}</p>
+                      {student.position && <p><strong>Position actuelle :</strong> {student.position}</p>}
+                      {student.bourse && <p><strong>Bourse :</strong> {student.bourse}</p>}
+                      {description && (
+                        <div className="mt-3 text-gray-600 border-t border-gray-200 pt-3 text-justify leading-relaxed">
+                          <span className="block font-semibold text-gray-800 mb-1">Description :</span>
+                          {displayText}
+                          {description.length > 150 && (
+                            <button
+                              onClick={() => toggleDescription(student.id)}
+                              className="text-darkGreen text-sm font-medium mt-2 hover:underline focus:outline-none"
+                            >
+                              {isExpanded ? 'Voir moins' : 'Voir plus'}
+                            </button>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
+            </div>
+
+            {filteredStudents.length === 0 && (
+              <p className="text-center text-gray-500 mt-10">
+                Aucun ancien étudiant trouvé pour cette année.
+              </p>
             )}
           </div>
         )}

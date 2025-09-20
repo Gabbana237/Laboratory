@@ -38,13 +38,22 @@ const LabOverview = () => {
         </div>
 
         {/* Expertise */}
-        <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition">
-          <div className="text-yellow-500 text-4xl mb-4">⚗️</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">Nos Domaines d'Expertise</h3>
-          <p className="text-gray-600">
-            Spécialisé en catalyse, polymères durables, et chimie des matériaux avancés.
-          </p>
-        </div>
+       <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition">
+  <div className="text-yellow-500 text-4xl mb-4">⚗️</div>
+  <h3 className="text-2xl font-bold text-gray-800 mb-2">Nos Domaines d'Expertise</h3>
+  <ul className="list-disc pl-5 text-gray-600 space-y-2">
+    <li>
+      <strong>Électrochimie & Chimie Analytique</strong> : traitement des eaux, capteurs, dépollution par biomatériaux.
+    </li>
+    <li>
+      <strong>Chimie de Coordination</strong> : synthèse de complexes métalliques et cristallographie.
+    </li>
+    <li>
+      <strong>Chimie Physique & Théorique</strong> : chimie computationnelle, biocarburants, modélisation moléculaire.
+    </li>
+  </ul>
+</div>
+
       </div>
 
       {/* Statistics Section */}
